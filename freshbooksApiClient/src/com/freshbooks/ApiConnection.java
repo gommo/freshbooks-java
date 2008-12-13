@@ -33,13 +33,15 @@ public class ApiConnection {
 
     URL apiUrl;
     String key;
+    String userAgent;
     HttpClient client;
     String base64key;
     boolean debug;
     
-    public ApiConnection(URL apiUrl, String key) {
+    public ApiConnection(URL apiUrl, String key, String userAgent) {
         this.apiUrl = apiUrl;
         this.key = key;
+        this.userAgent = userAgent;
         client = new HttpClient();
         client.getParams().setAuthenticationPreemptive(true);
         client.getState().setCredentials(new AuthScope(apiUrl.getHost(), 443, AuthScope.ANY_REALM), new UsernamePasswordCredentials(key, ""));
@@ -64,7 +66,7 @@ public class ApiConnection {
                 method.setContentChunked(false);
                 method.setDoAuthentication(true);
                 method.setFollowRedirects(false);
-                method.addRequestHeader("User-Agent", "Clarity Accounting (Java Client)");
+                method.addRequestHeader("User-Agent", userAgent);
                 //method.addRequestHeader("Authorization", base64key);
                 method.setRequestEntity(new StringRequestEntity(paramString, "text/xml", "utf-8"));
                 client.executeMethod(method);
