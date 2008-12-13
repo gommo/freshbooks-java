@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<response status="ok">
+  <invoice>
+    <invoice_id>344</invoice_id>
+    <client_id>3</client_id>
+
+    <number>FB00004</number>
+    <amount>45.6</amount> # Total invoice amount, taxes inc. (Read Only)
+    <status>paid</status>
+    <date>2007-06-23</date>
+    <po_number></po_number>
+    <discount>0</discount>
+    <notes>Due upon receipt.</notes>
+    <terms>Payment due in 30 days.</terms>
+
+    <url>http://sample.freshbooks.com/inv/167-344-7c7q2</url> # (Read-only)
+    <auth_url>http://sample.freshbooks.com/inv/167-344-7c7q2-z</auth_url> # (Read-only)
+    <recurring_id>15</recurring_id> # (Read-only)
+
+    <organization>ABC Corp</organization>
+    <first_name>John</first_name>
+    <last_name>Doe</last_name>
+    <p_street1>123 Fake St.</p_street1>
+    <p_street2>Unit 555</p_street2>
+    <p_city>New York</p_city>
+    <p_state>New York</p_state>
+    <p_country>United States</p_country>
+    <p_code>553132</p_code>
+
+    <lines>
+      <line>
+        <amount>40</amount> # Line amount, taxes/discount excluding. (Read Only)
+
+        <name>Yard work</name>
+        <description>Mowed the lawn</description>
+        <unit_cost>10</unit_cost>
+        <quantity>4</quantity>
+        <tax1_name>GST</tax1_name>
+        <tax2_name>PST</tax2_name>
+        <tax1_percent>8</tax1_percent>
+        <tax2_percent>6</tax2_percent>
+      </line>
+    </lines>
+  </invoice>
+</response>
