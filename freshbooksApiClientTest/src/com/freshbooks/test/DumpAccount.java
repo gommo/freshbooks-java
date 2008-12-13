@@ -1,8 +1,12 @@
-package com.freshbooks;
+package com.freshbooks.test;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import com.freshbooks.ApiConnection;
+import com.freshbooks.ApiException;
+import com.freshbooks.model.Invoice;
 
 public class DumpAccount {
 
@@ -17,7 +21,7 @@ public class DumpAccount {
         String url = args[0];
         String key = args[1];
         try {
-            ApiConnection con = new ApiConnection(new URL(url), key);
+            ApiConnection con = new ApiConnection(new URL(url), key, "FreshBooks Java API Client Test");
             con.setDebug(true);
             try {
                 for(Invoice invoice : con.listInvoices(10)) {

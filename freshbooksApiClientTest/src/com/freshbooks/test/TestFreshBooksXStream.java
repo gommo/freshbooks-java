@@ -1,4 +1,4 @@
-package com.freshbooks;
+package com.freshbooks.test;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -7,6 +7,15 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import com.freshbooks.CustomXStream;
+import com.freshbooks.model.Client;
+import com.freshbooks.model.Clients;
+import com.freshbooks.model.Expense;
+import com.freshbooks.model.Expenses;
+import com.freshbooks.model.Invoice;
+import com.freshbooks.model.Invoices;
+import com.freshbooks.model.Request;
+import com.freshbooks.model.Response;
 import com.thoughtworks.xstream.XStream;
 
 public class TestFreshBooksXStream extends Assert {
