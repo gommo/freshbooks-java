@@ -1,9 +1,13 @@
-package com.freshbooks;
+package com.freshbooks.model;
+
+import java.io.Serializable;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("line")
-public class InvoiceLine {
+public class InvoiceLine implements Serializable {
+    private static final long serialVersionUID = -749813547280288310L;
+    
     String name;
     String description;
     

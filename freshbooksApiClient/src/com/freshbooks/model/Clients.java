@@ -1,4 +1,4 @@
-package com.freshbooks;
+package com.freshbooks.model;
 
 import java.util.ArrayList;
 

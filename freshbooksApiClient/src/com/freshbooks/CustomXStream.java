@@ -1,6 +1,13 @@
 package com.freshbooks;
 
 
+import com.freshbooks.model.Client;
+import com.freshbooks.model.Clients;
+import com.freshbooks.model.Invoice;
+import com.freshbooks.model.InvoiceLine;
+import com.freshbooks.model.Request;
+import com.freshbooks.model.Response;
+import com.freshbooks.model.ResponseStatus;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;

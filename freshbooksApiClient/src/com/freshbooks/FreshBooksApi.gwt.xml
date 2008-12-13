@@ -1,0 +1,4 @@
+<module>
+    <!-- Make these classes usable by GWT code, since they are passed to the GWT client for display -->
+    <source path="model"/>
+</module>

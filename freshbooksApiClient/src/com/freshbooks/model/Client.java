@@ -1,9 +1,12 @@
-package com.freshbooks;
+package com.freshbooks.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("client")
 public class Client {
+    @XStreamAlias("client_id")
+    String id;
+    
     @XStreamAlias("first_name")
     String firstName;
     
@@ -189,6 +192,12 @@ public class Client {
     }
     public void setSecondaryCode(String secondaryCode) {
         this.secondaryCode = secondaryCode;
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
     
 }

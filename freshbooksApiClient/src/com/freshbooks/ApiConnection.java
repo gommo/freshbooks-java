@@ -20,6 +20,12 @@ import org.slf4j.LoggerFactory;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import com.freshbooks.model.Invoice;
+import com.freshbooks.model.Invoices;
+import com.freshbooks.model.PagedResponseContent;
+import com.freshbooks.model.Request;
+import com.freshbooks.model.RequestMethod;
+import com.freshbooks.model.Response;
 import com.thoughtworks.xstream.XStream;
 
 public class ApiConnection {
