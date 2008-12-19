@@ -27,6 +27,14 @@ public class Message {
     protected Payment payment;
     protected Payments payments;
     
+    @XStreamAlias("category_id")
+    protected String categoryId;
+    protected Category category;
+    protected Categories categories;
+    
+    @XStreamAlias("project_id")
+    protected String projectId;
+    
     public Message() {
         super();
     }
@@ -133,6 +141,38 @@ public class Message {
 
     public void setPayments(Payments payments) {
         this.payments = payments;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Categories categories) {
+        this.categories = categories;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
     
 }

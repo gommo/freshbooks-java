@@ -13,6 +13,8 @@ public class Payment {
     @XStreamAlias("invoice_id")
     String invoiceId;
     
+    double amount;
+    
     Date date;
     
     String type;
@@ -65,6 +67,14 @@ public class Payment {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
     
     

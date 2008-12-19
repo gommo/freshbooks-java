@@ -48,6 +48,14 @@ public class Request extends Message {
         case PAYMENT_GET:
             this.paymentId = id;
             break;
+        case EXPENSE_DELETE:
+        case EXPENSE_GET:
+            this.expenseId = id;
+            break;
+        case CATEGORY_DELETE:
+        case CATEGORY_GET:
+            this.categoryId = id;
+            break;
         default:
             throw new UnsupportedOperationException("Don't know what to do with an id for method "+method);
         }
