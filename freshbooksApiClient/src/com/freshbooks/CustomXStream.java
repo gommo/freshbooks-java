@@ -37,11 +37,11 @@ public class CustomXStream extends XStream {
         return new MapperWrapper(next) {
             @SuppressWarnings("unchecked")
             public boolean shouldSerializeMember(Class definedIn, String fieldName) {
-                System.out.println("shouldSerializeMember("+definedIn.getName()+", "+fieldName+") implicitCollection = "+getImplicitCollectionDefForFieldName(definedIn, fieldName));
+                //System.out.println("shouldSerializeMember("+definedIn.getName()+", "+fieldName+") implicitCollection = "+getImplicitCollectionDefForFieldName(definedIn, fieldName));
                 try {
                     return definedIn != Object.class || realClass(fieldName) != null;
                 } catch(CannotResolveClassException cnrce) {
-                    System.out.println("shouldSerializeMember("+definedIn.getName()+", "+fieldName+") failed to resolve class; skipping...");
+                    //System.out.println("shouldSerializeMember("+definedIn.getName()+", "+fieldName+") failed to resolve class; skipping...");
                     return false;
                 }
             }
