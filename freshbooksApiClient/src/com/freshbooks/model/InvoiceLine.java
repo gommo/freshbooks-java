@@ -98,5 +98,56 @@ public class InvoiceLine implements Serializable {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof InvoiceLine))
+            return false;
+        InvoiceLine other = (InvoiceLine) obj;
+        if (amount == null) {
+            if (other.amount != null)
+                return false;
+        } else if (!amount.equals(other.amount))
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (Double.doubleToLongBits(quantity) != Double.doubleToLongBits(other.quantity))
+            return false;
+        if (tax1Name == null) {
+            if (other.tax1Name != null)
+                return false;
+        } else if (!tax1Name.equals(other.tax1Name))
+            return false;
+        if (tax1Percent == null) {
+            if (other.tax1Percent != null)
+                return false;
+        } else if (!tax1Percent.equals(other.tax1Percent))
+            return false;
+        if (tax2Name == null) {
+            if (other.tax2Name != null)
+                return false;
+        } else if (!tax2Name.equals(other.tax2Name))
+            return false;
+        if (tax2Percent == null) {
+            if (other.tax2Percent != null)
+                return false;
+        } else if (!tax2Percent.equals(other.tax2Percent))
+            return false;
+        if (Double.doubleToLongBits(unitCost) != Double.doubleToLongBits(other.unitCost))
+            return false;
+        return true;
+    }
     
 }

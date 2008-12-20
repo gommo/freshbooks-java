@@ -125,5 +125,93 @@ public class Expense {
     public void setTax2Amount(String tax2Amount) {
         this.tax2Amount = tax2Amount;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Expense))
+            return false;
+        Expense other = (Expense) obj;
+        if (amount == null) {
+            if (other.amount != null)
+                return false;
+        } else if (!amount.equals(other.amount))
+            return false;
+        if (categoryId == null) {
+            if (other.categoryId != null)
+                return false;
+        } else if (!categoryId.equals(other.categoryId))
+            return false;
+        if (clientId == null) {
+            if (other.clientId != null)
+                return false;
+        } else if (!clientId.equals(other.clientId))
+            return false;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (notes == null) {
+            if (other.notes != null)
+                return false;
+        } else if (!notes.equals(other.notes))
+            return false;
+        if (projectId == null) {
+            if (other.projectId != null)
+                return false;
+        } else if (!projectId.equals(other.projectId))
+            return false;
+        if (staffId == null) {
+            if (other.staffId != null)
+                return false;
+        } else if (!staffId.equals(other.staffId))
+            return false;
+        if (status == null) {
+            if (other.status != null)
+                return false;
+        } else if (!status.equals(other.status))
+            return false;
+        if (tax1Amount == null) {
+            if (other.tax1Amount != null)
+                return false;
+        } else if (!tax1Amount.equals(other.tax1Amount))
+            return false;
+        if (tax1Name == null) {
+            if (other.tax1Name != null)
+                return false;
+        } else if (!tax1Name.equals(other.tax1Name))
+            return false;
+        if (tax1Percent == null) {
+            if (other.tax1Percent != null)
+                return false;
+        } else if (!tax1Percent.equals(other.tax1Percent))
+            return false;
+        if (tax2Amount == null) {
+            if (other.tax2Amount != null)
+                return false;
+        } else if (!tax2Amount.equals(other.tax2Amount))
+            return false;
+        if (tax2Name == null) {
+            if (other.tax2Name != null)
+                return false;
+        } else if (!tax2Name.equals(other.tax2Name))
+            return false;
+        if (tax2Percent == null) {
+            if (other.tax2Percent != null)
+                return false;
+        } else if (!tax2Percent.equals(other.tax2Percent))
+            return false;
+        return true;
+    }
     
 }

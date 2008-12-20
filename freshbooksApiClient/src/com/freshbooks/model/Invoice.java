@@ -220,4 +220,156 @@ public class Invoice {
     public void setLinks(Links links) {
         this.links = links;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Invoice))
+            return false;
+        Invoice other = (Invoice) obj;
+        if (amount == null) {
+            if (other.amount != null)
+                return false;
+        } else if (!amount.equals(other.amount))
+            return false;
+        if (amountOutstanding == null) {
+            if (other.amountOutstanding != null)
+                return false;
+        } else if (!amountOutstanding.equals(other.amountOutstanding))
+            return false;
+        if (amountPaid == null) {
+            if (other.amountPaid != null)
+                return false;
+        } else if (!amountPaid.equals(other.amountPaid))
+            return false;
+        if (authUrl == null) {
+            if (other.authUrl != null)
+                return false;
+        } else if (!authUrl.equals(other.authUrl))
+            return false;
+        if (city == null) {
+            if (other.city != null)
+                return false;
+        } else if (!city.equals(other.city))
+            return false;
+        if (clientId == null) {
+            if (other.clientId != null)
+                return false;
+        } else if (!clientId.equals(other.clientId))
+            return false;
+        if (code == null) {
+            if (other.code != null)
+                return false;
+        } else if (!code.equals(other.code))
+            return false;
+        if (country == null) {
+            if (other.country != null)
+                return false;
+        } else if (!country.equals(other.country))
+            return false;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (discount == null) {
+            if (other.discount != null)
+                return false;
+        } else if (!discount.equals(other.discount))
+            return false;
+        if (firstName == null) {
+            if (other.firstName != null)
+                return false;
+        } else if (!firstName.equals(other.firstName))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (lines == null) {
+            if (other.lines != null)
+                return false;
+        } else {
+            if(lines.size() != other.lines.size())
+                return false;
+            for(int i=0; i < lines.size(); i++) {
+                if(!lines.get(i).equals(other.lines.get(i)))
+                    return false;
+            }
+        }
+        if (links == null) {
+            if (other.links != null)
+                return false;
+        } else if (!links.equals(other.links))
+            return false;
+        if (notes == null) {
+            if (other.notes != null)
+                return false;
+        } else if (!notes.equals(other.notes))
+            return false;
+        if (number == null) {
+            if (other.number != null)
+                return false;
+        } else if (!number.equals(other.number))
+            return false;
+        if (organization == null) {
+            if (other.organization != null)
+                return false;
+        } else if (!organization.equals(other.organization))
+            return false;
+        if (poNumber == null) {
+            if (other.poNumber != null)
+                return false;
+        } else if (!poNumber.equals(other.poNumber))
+            return false;
+        if (recurringId == null) {
+            if (other.recurringId != null)
+                return false;
+        } else if (!recurringId.equals(other.recurringId))
+            return false;
+        if (state == null) {
+            if (other.state != null)
+                return false;
+        } else if (!state.equals(other.state))
+            return false;
+        if (status == null) {
+            if (other.status != null)
+                return false;
+        } else if (!status.equals(other.status))
+            return false;
+        if (street1 == null) {
+            if (other.street1 != null)
+                return false;
+        } else if (!street1.equals(other.street1))
+            return false;
+        if (street2 == null) {
+            if (other.street2 != null)
+                return false;
+        } else if (!street2.equals(other.street2))
+            return false;
+        if (terms == null) {
+            if (other.terms != null)
+                return false;
+        } else if (!terms.equals(other.terms))
+            return false;
+        if (url == null) {
+            if (other.url != null)
+                return false;
+        } else if (!url.equals(other.url))
+            return false;
+        return true;
+    }
+    
+    
+    
 }

@@ -76,6 +76,50 @@ public class Payment {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Payment))
+            return false;
+        Payment other = (Payment) obj;
+        if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
+            return false;
+        if (clientId == null) {
+            if (other.clientId != null)
+                return false;
+        } else if (!clientId.equals(other.clientId))
+            return false;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (invoiceId == null) {
+            if (other.invoiceId != null)
+                return false;
+        } else if (!invoiceId.equals(other.invoiceId))
+            return false;
+        if (note == null) {
+            if (other.note != null)
+                return false;
+        } else if (!note.equals(other.note))
+            return false;
+        if (type == null) {
+            if (other.type != null)
+                return false;
+        } else if (!type.equals(other.type))
+            return false;
+        return true;
+    }
     
     
 }

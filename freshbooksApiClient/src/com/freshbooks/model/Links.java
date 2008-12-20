@@ -36,5 +36,32 @@ public class Links implements Serializable {
     public void setEdit(String edit) {
         this.edit = edit;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Links))
+            return false;
+        Links other = (Links) obj;
+        if (clientView == null) {
+            if (other.clientView != null)
+                return false;
+        } else if (!clientView.equals(other.clientView))
+            return false;
+        if (edit == null) {
+            if (other.edit != null)
+                return false;
+        } else if (!edit.equals(other.edit))
+            return false;
+        if (view == null) {
+            if (other.view != null)
+                return false;
+        } else if (!view.equals(other.view))
+            return false;
+        return true;
+    }
     
 }

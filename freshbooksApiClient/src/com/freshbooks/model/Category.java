@@ -34,5 +34,37 @@ public class Category {
     public void setTax2(String tax2) {
         this.tax2 = tax2;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Category))
+            return false;
+        Category other = (Category) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (tax1 == null) {
+            if (other.tax1 != null)
+                return false;
+        } else if (!tax1.equals(other.tax1))
+            return false;
+        if (tax2 == null) {
+            if (other.tax2 != null)
+                return false;
+        } else if (!tax2.equals(other.tax2))
+            return false;
+        return true;
+    }
     
 }

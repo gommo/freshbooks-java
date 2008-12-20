@@ -199,5 +199,138 @@ public class Client {
     public void setId(String id) {
         this.id = id;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Client))
+            return false;
+        Client other = (Client) obj;
+        if (city == null) {
+            if (other.city != null)
+                return false;
+        } else if (!city.equals(other.city))
+            return false;
+        if (code == null) {
+            if (other.code != null)
+                return false;
+        } else if (!code.equals(other.code))
+            return false;
+        if (country == null) {
+            if (other.country != null)
+                return false;
+        } else if (!country.equals(other.country))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        if (fax == null) {
+            if (other.fax != null)
+                return false;
+        } else if (!fax.equals(other.fax))
+            return false;
+        if (firstName == null) {
+            if (other.firstName != null)
+                return false;
+        } else if (!firstName.equals(other.firstName))
+            return false;
+        if (homePhone == null) {
+            if (other.homePhone != null)
+                return false;
+        } else if (!homePhone.equals(other.homePhone))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (mobile == null) {
+            if (other.mobile != null)
+                return false;
+        } else if (!mobile.equals(other.mobile))
+            return false;
+        if (notes == null) {
+            if (other.notes != null)
+                return false;
+        } else if (!notes.equals(other.notes))
+            return false;
+        if (organization == null) {
+            if (other.organization != null)
+                return false;
+        } else if (!organization.equals(other.organization))
+            return false;
+        if (password == null) {
+            if (other.password != null)
+                return false;
+        } else if (!password.equals(other.password))
+            return false;
+        if (secondaryCity == null) {
+            if (other.secondaryCity != null)
+                return false;
+        } else if (!secondaryCity.equals(other.secondaryCity))
+            return false;
+        if (secondaryCode == null) {
+            if (other.secondaryCode != null)
+                return false;
+        } else if (!secondaryCode.equals(other.secondaryCode))
+            return false;
+        if (secondaryCountry == null) {
+            if (other.secondaryCountry != null)
+                return false;
+        } else if (!secondaryCountry.equals(other.secondaryCountry))
+            return false;
+        if (secondaryState == null) {
+            if (other.secondaryState != null)
+                return false;
+        } else if (!secondaryState.equals(other.secondaryState))
+            return false;
+        if (secondaryStreet1 == null) {
+            if (other.secondaryStreet1 != null)
+                return false;
+        } else if (!secondaryStreet1.equals(other.secondaryStreet1))
+            return false;
+        if (secondaryStreet2 == null) {
+            if (other.secondaryStreet2 != null)
+                return false;
+        } else if (!secondaryStreet2.equals(other.secondaryStreet2))
+            return false;
+        if (state == null) {
+            if (other.state != null)
+                return false;
+        } else if (!state.equals(other.state))
+            return false;
+        if (street1 == null) {
+            if (other.street1 != null)
+                return false;
+        } else if (!street1.equals(other.street1))
+            return false;
+        if (street2 == null) {
+            if (other.street2 != null)
+                return false;
+        } else if (!street2.equals(other.street2))
+            return false;
+        if (username == null) {
+            if (other.username != null)
+                return false;
+        } else if (!username.equals(other.username))
+            return false;
+        if (workPhone == null) {
+            if (other.workPhone != null)
+                return false;
+        } else if (!workPhone.equals(other.workPhone))
+            return false;
+        return true;
+    }
     
 }
