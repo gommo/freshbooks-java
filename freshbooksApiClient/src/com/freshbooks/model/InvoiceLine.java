@@ -123,7 +123,7 @@ public class InvoiceLine implements Serializable {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (Double.doubleToLongBits(quantity) != Double.doubleToLongBits(other.quantity))
+        if (quantity != other.quantity)
             return false;
         if (tax1Name == null) {
             if (other.tax1Name != null)
@@ -145,7 +145,7 @@ public class InvoiceLine implements Serializable {
                 return false;
         } else if (!tax2Percent.equals(other.tax2Percent))
             return false;
-        if (Double.doubleToLongBits(unitCost) != Double.doubleToLongBits(other.unitCost))
+        if (unitCost != other.unitCost)
             return false;
         return true;
     }

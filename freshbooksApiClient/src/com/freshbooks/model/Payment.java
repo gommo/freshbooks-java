@@ -86,7 +86,7 @@ public class Payment {
         if (!(obj instanceof Payment))
             return false;
         Payment other = (Payment) obj;
-        if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
+        if (amount != other.amount)
             return false;
         if (clientId == null) {
             if (other.clientId != null)
