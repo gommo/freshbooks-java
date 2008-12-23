@@ -72,6 +72,13 @@ public class Request extends Message {
         this.method = method;
     }
 
+    public Request(RequestMethod method, Integer page, Integer perPage, Date dateFrom) {
+        this(method.id);
+        this.page = page;
+        this.perPage = perPage;
+        this.dateFrom = dateFrom;
+    }
+
     public String getMethod() {
         return method;
     }

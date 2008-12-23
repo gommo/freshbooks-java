@@ -54,7 +54,6 @@ public class Client {
     @XStreamAlias("s_code")
     String secondaryCode;
     
-    
     public String getFirstName() {
         return firstName;
     }

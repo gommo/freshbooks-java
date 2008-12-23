@@ -12,7 +12,27 @@ public class Response extends Message {
     
     public Response() {
     }
-
+    public Response(Clients clients) {
+        status = ResponseStatus.ok;
+        setClients(clients);
+    }
+    public Response(Invoices invoices) {
+        status = ResponseStatus.ok;
+        setInvoices(invoices);
+    }
+    public Response(Payments payments) {
+        status = ResponseStatus.ok;
+        setPayments(payments);
+    }
+    public Response(Categories categories) {
+        status = ResponseStatus.ok;
+        setCategories(categories);
+    }
+    public Response(Expenses expenses) {
+        status = ResponseStatus.ok;
+        setExpenses(expenses);
+    }
+    
     public ResponseStatus getStatus() {
         return status;
     }

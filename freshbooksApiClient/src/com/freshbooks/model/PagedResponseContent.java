@@ -1,7 +1,9 @@
 package com.freshbooks.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
@@ -72,10 +74,14 @@ public class PagedResponseContent<T> implements Iterable<T> {
     }
 
     public boolean isEmpty() {
-        return contents.isEmpty();
+        return contents == null || contents.isEmpty();
     }
 
     public Iterator<T> iterator() {
+        if(contents == null) {
+            List<T> emptyList = Collections.emptyList();
+            return emptyList.iterator();
+        }
         return contents.iterator();
     }
 

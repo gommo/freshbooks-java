@@ -24,7 +24,7 @@ public class DumpAccount {
             ApiConnection con = new ApiConnection(new URL(url), key, "FreshBooks Java API Client Test");
             con.setDebug(true);
             try {
-                for(Invoice invoice : con.listInvoices(10)) {
+                for(Invoice invoice : con.listInvoices(null, null, null, null, null)) {
                     System.out.println("Found invoice "+invoice.getId()+" with amount "+invoice.getAmount());
                 }
             } catch(Error e) {

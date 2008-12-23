@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
@@ -40,21 +39,28 @@ import com.thoughtworks.xstream.XStream;
 public class ApiConnection {
     static final Logger logger = LoggerFactory.getLogger(ApiConnection.class);
 
-    URL apiUrl;
+    URL url;
     String key;
     String userAgent;
-    HttpClient client;
-    String base64key;
+    transient HttpClient client;
     boolean debug;
     
+    protected ApiConnection() {
+        
+    }
     public ApiConnection(URL apiUrl, String key, String userAgent) {
-        this.apiUrl = apiUrl;
+        this.url = apiUrl;
         this.key = key;
         this.userAgent = userAgent;
-        client = new HttpClient();
-        client.getParams().setAuthenticationPreemptive(true);
-        client.getState().setCredentials(new AuthScope(apiUrl.getHost(), 443, AuthScope.ANY_REALM), new UsernamePasswordCredentials(key, ""));
-        base64key = new String(Base64.encodeBase64((key+":X").getBytes()));
+    }
+
+    private HttpClient getClient() {
+        if(client == null) {
+            client = new HttpClient();
+            client.getParams().setAuthenticationPreemptive(true);
+            client.getState().setCredentials(new AuthScope(url.getHost(), 443, AuthScope.ANY_REALM), new UsernamePasswordCredentials(key, ""));
+        }
+        return client;
     }
 
     /**
@@ -65,12 +71,12 @@ public class ApiConnection {
      * @throws IOException 
      * @throws Error
      */
-    private Response performRequest(Request request) throws ApiException, IOException {
+    protected Response performRequest(Request request) throws ApiException, IOException {
         try {
             XStream xs = new CustomXStream();
             
             String paramString = xs.toXML(request);
-            PostMethod method = new PostMethod(apiUrl.toString());
+            PostMethod method = new PostMethod(url.toString());
             try {
                 method.setContentChunked(false);
                 method.setDoAuthentication(true);
@@ -78,9 +84,9 @@ public class ApiConnection {
                 method.addRequestHeader("User-Agent", userAgent);
                 //method.addRequestHeader("Authorization", base64key);
                 method.setRequestEntity(new StringRequestEntity(paramString, "text/xml", "utf-8"));
-                client.executeMethod(method);
+                getClient().executeMethod(method);
                 if(debug) {
-                    logger.debug("POST "+apiUrl+" "+paramString+" yields: "+method.getResponseBodyAsString());
+                    logger.debug("POST "+url+" "+paramString+" yields: "+method.getResponseBodyAsString());
                 }
                 InputStream is = method.getResponseBodyAsStream();
                 try {
@@ -110,12 +116,12 @@ public class ApiConnection {
         return performRequest(new Request(RequestMethod.INVOICE_CREATE, invoice)).getInvoiceId();
     }
 
-    public URL getApiUrl() {
-        return apiUrl;
+    public URL getUrl() {
+        return url;
     }
 
-    public void setApiUrl(URL apiUrl) {
-        this.apiUrl = apiUrl;
+    public void setUrl(URL apiUrl) {
+        this.url = apiUrl;
     }
 
     public String getKey() {
@@ -329,7 +335,7 @@ public class ApiConnection {
      * @param clientId If non-null, return only payments relevant to a particular client
      */
     public Payments listPayments(int page, Integer perPage, Date dateFrom, Date dateTo, String clientId) throws ApiException, IOException {
-        Request request = new Request(RequestMethod.INVOICE_LIST);
+        Request request = new Request(RequestMethod.PAYMENT_LIST);
         request.setPage(page);
         request.setPerPage(perPage);
         request.setDateFrom(dateFrom);
@@ -346,7 +352,7 @@ public class ApiConnection {
      * @param clientId If non-null, return only expenses relevant to a particular client
      */
     public Expenses listExpenses(int page, Integer perPage, Date dateFrom, Date dateTo, String clientId, String categoryId, String projectId) throws ApiException, IOException {
-        Request request = new Request(RequestMethod.INVOICE_LIST);
+        Request request = new Request(RequestMethod.EXPENSE_LIST);
         request.setPage(page);
         request.setPerPage(perPage);
         request.setDateFrom(dateFrom);
@@ -369,7 +375,7 @@ public class ApiConnection {
      * @throws IOException
      */
     public Clients listClients(int page, Integer perPage, String username, String email) throws ApiException, IOException {
-        Request request = new Request(RequestMethod.INVOICE_LIST);
+        Request request = new Request(RequestMethod.CLIENT_LIST);
         request.setPage(page);
         request.setPerPage(perPage);
         request.setUsername(username);
