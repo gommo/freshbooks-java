@@ -8,10 +8,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("invoice")
 public class Invoice {
     @XStreamAlias("invoice_id")
-    String id;
+    Long id;
     
     @XStreamAlias("client_id")
-    String clientId;
+    Long clientId;
     
     String number;
 
@@ -64,10 +64,10 @@ public class Invoice {
     
     Links links;
     
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
-    public void setClientId(String clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
     public String getNumber() {
@@ -196,10 +196,10 @@ public class Invoice {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public Double getAmountOutstanding() {

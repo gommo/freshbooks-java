@@ -7,11 +7,11 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("payment")
 public class Payment {
     @XStreamAlias("payment_id")
-    String id;    
+    Long id;    
     @XStreamAlias("client_id")
-    String clientId;
+    Long clientId;
     @XStreamAlias("invoice_id")
-    String invoiceId;
+    Long invoiceId;
     
     double amount;
     
@@ -21,27 +21,27 @@ public class Payment {
     
     String note;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 
-    public String getInvoiceId() {
+    public Long getInvoiceId() {
         return invoiceId;
     }
 
-    public void setInvoiceId(String invoiceId) {
+    public void setInvoiceId(Long invoiceId) {
         this.invoiceId = invoiceId;
     }
 

@@ -5,45 +5,45 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class Message {
 
     @XStreamAlias("client_id")
-    protected String clientId;
+    protected Long clientId;
     protected Client client;
     protected Clients clients;
     
     @XStreamAlias("invoice_id")
-    protected String invoiceId;
+    protected Long invoiceId;
     protected Invoice invoice;
     protected Invoices invoices;
 
     @XStreamAlias("staff_id")
-    protected String staffId;
+    protected Long staffId;
     
     @XStreamAlias("expense_id")
-    protected String expenseId;
+    protected Long expenseId;
     protected Expense expense;
     protected Expenses expenses;
     
     @XStreamAlias("payment_id")
-    protected String paymentId;
+    protected Long paymentId;
     protected Payment payment;
     protected Payments payments;
     
     @XStreamAlias("category_id")
-    protected String categoryId;
+    protected Long categoryId;
     protected Category category;
     protected Categories categories;
     
     @XStreamAlias("project_id")
-    protected String projectId;
+    protected Long projectId;
     
     public Message() {
         super();
     }
 
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 
@@ -55,11 +55,11 @@ public class Message {
         this.client = client;
     }
 
-    public String getInvoiceId() {
+    public Long getInvoiceId() {
         return invoiceId;
     }
 
-    public void setInvoiceId(String invoiceId) {
+    public void setInvoiceId(Long invoiceId) {
         this.invoiceId = invoiceId;
     }
 
@@ -87,19 +87,19 @@ public class Message {
         this.invoices = invoices;
     }
 
-    public String getStaffId() {
+    public Long getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(String staffId) {
+    public void setStaffId(Long staffId) {
         this.staffId = staffId;
     }
 
-    public String getExpenseId() {
+    public Long getExpenseId() {
         return expenseId;
     }
 
-    public void setExpenseId(String expenseId) {
+    public void setExpenseId(Long expenseId) {
         this.expenseId = expenseId;
     }
 
@@ -119,11 +119,11 @@ public class Message {
         this.expenses = expenses;
     }
 
-    public String getPaymentId() {
+    public Long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(String paymentId) {
+    public void setPaymentId(Long paymentId) {
         this.paymentId = paymentId;
     }
 
@@ -143,11 +143,11 @@ public class Message {
         this.payments = payments;
     }
 
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -167,11 +167,11 @@ public class Message {
         this.categories = categories;
     }
 
-    public String getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(String projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
     

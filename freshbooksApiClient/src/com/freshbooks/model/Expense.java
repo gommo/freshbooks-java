@@ -7,15 +7,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("expense")
 public class Expense {
     @XStreamAlias("expense_id")
-    String id;
+    Long id;
     @XStreamAlias("staff_id")
     String staffId;
     @XStreamAlias("category_id")
-    String categoryId;
+    Long categoryId;
     @XStreamAlias("project_id")
     String projectId;
     @XStreamAlias("client_id")
-    String clientId;
+    Long clientId;
     Double amount;
     String notes;
     String status;
@@ -35,10 +35,10 @@ public class Expense {
     @XStreamAlias("tax2_amount")
     String tax2Amount;
     
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getStaffId() {
@@ -47,10 +47,10 @@ public class Expense {
     public void setStaffId(String staffId) {
         this.staffId = staffId;
     }
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
     public String getProjectId() {
@@ -59,10 +59,10 @@ public class Expense {
     public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
-    public void setClientId(String clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
     public Double getAmount() {

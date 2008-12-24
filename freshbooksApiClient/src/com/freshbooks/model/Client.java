@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("client")
 public class Client {
     @XStreamAlias("client_id")
-    String id;
+    Long id;
     
     @XStreamAlias("first_name")
     String firstName;
@@ -192,10 +192,10 @@ public class Client {
     public void setSecondaryCode(String secondaryCode) {
         this.secondaryCode = secondaryCode;
     }
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -86,7 +86,7 @@ public class ApiConnection {
                 method.setRequestEntity(new StringRequestEntity(paramString, "text/xml", "utf-8"));
                 getClient().executeMethod(method);
                 if(debug) {
-                    logger.debug("POST "+url+" "+paramString+" yields: "+method.getResponseBodyAsString());
+                    logger.info("POST "+url+":\n"+paramString+"\nYields:\n"+method.getResponseBodyAsString());
                 }
                 InputStream is = method.getResponseBodyAsStream();
                 try {
@@ -112,7 +112,7 @@ public class ApiConnection {
      * @throws ApiException If an error is returned from FreshBooks
      * @throws IOException If there is a communications error with the FreshBooks API server
      */
-    public String createInvoice(Invoice invoice) throws ApiException, IOException {
+    public Long createInvoice(Invoice invoice) throws ApiException, IOException {
         return performRequest(new Request(RequestMethod.INVOICE_CREATE, invoice)).getInvoiceId();
     }
 
@@ -138,7 +138,7 @@ public class ApiConnection {
      * Note that the Freshbooks API only returns summaries of the invoice, not the full details
      * of the invoice.
      */
-    public Iterable<Invoice> listInvoices(final Integer perPage, final Date dateFrom, final Date dateTo, final String clientId, final String status) {
+    public Iterable<Invoice> listInvoices(final Integer perPage, final Date dateFrom, final Date dateTo, final Long clientId, final String status) {
         return new Iterable<Invoice>() {
             @Override
             public Iterator<Invoice> iterator() {
@@ -156,7 +156,7 @@ public class ApiConnection {
     /**
      * Iterate over the payments matching the given filters, or all invoices.
      */
-    public Iterable<Payment> listPayments(final Integer perPage, final Date dateFrom, final Date dateTo, final String clientId) {
+    public Iterable<Payment> listPayments(final Integer perPage, final Date dateFrom, final Date dateTo, final Long clientId) {
         return new Iterable<Payment>() {
             @Override
             public Iterator<Payment> iterator() {
@@ -174,7 +174,7 @@ public class ApiConnection {
     /**
      * Iterate over the expenses matching the given filters, or all invoices.
      */
-    public Iterable<Expense> listExpenses(final Integer perPage, final Date dateFrom, final Date dateTo, final String clientId, final String categoryId, final String projectId) {
+    public Iterable<Expense> listExpenses(final Integer perPage, final Date dateFrom, final Date dateTo, final Long clientId, final Long categoryId, final Long projectId) {
         return new Iterable<Expense>() {
             @Override
             public Iterator<Expense> iterator() {
@@ -213,14 +213,14 @@ public class ApiConnection {
         final protected Integer perPage;
         final protected Date dateFrom;
         final protected Date dateTo;
-        final protected String clientId;
+        final protected Long clientId;
         final protected String status;
         final protected String username;
         final protected String email;
-        final protected String categoryId;
-        final protected String projectId;
+        final protected Long categoryId;
+        final protected Long projectId;
         
-        public RecordsIterator(Integer perPage, Date dateFrom, Date dateTo, String clientId, String status, String username, String email, String categoryId, String projectId) throws ApiException, IOException {
+        public RecordsIterator(Integer perPage, Date dateFrom, Date dateTo, Long clientId, String status, String username, String email, Long categoryId, Long projectId) throws ApiException, IOException {
             this.perPage = perPage;
             this.dateFrom = dateFrom;
             this.dateTo = dateTo;
@@ -266,7 +266,7 @@ public class ApiConnection {
     
     class InvoicesIterator extends RecordsIterator<Invoice> {
 
-        private InvoicesIterator(Integer perPage, Date dateFrom, Date dateTo, String clientId, String status) throws ApiException, IOException {
+        private InvoicesIterator(Integer perPage, Date dateFrom, Date dateTo, Long clientId, String status) throws ApiException, IOException {
             super(perPage, dateFrom, dateTo, clientId, status, null, null, null, null);
         }
 
@@ -278,7 +278,7 @@ public class ApiConnection {
     
     class PaymentsIterator extends RecordsIterator<Payment> {
 
-        private PaymentsIterator(Integer perPage, Date dateFrom, Date dateTo, String clientId) throws ApiException, IOException {
+        private PaymentsIterator(Integer perPage, Date dateFrom, Date dateTo, Long clientId) throws ApiException, IOException {
             super(perPage, dateFrom, dateTo, clientId, null, null, null, null, null);
         }
         
@@ -289,7 +289,7 @@ public class ApiConnection {
     }
     class ExpensesIterator extends RecordsIterator<Expense> {
 
-        private ExpensesIterator(Integer perPage, Date dateFrom, Date dateTo, String clientId, String categoryId, String projectId) throws ApiException, IOException {
+        private ExpensesIterator(Integer perPage, Date dateFrom, Date dateTo, Long clientId, Long categoryId, Long projectId) throws ApiException, IOException {
             super(perPage, dateFrom, dateTo, clientId, null, null, null, categoryId, projectId);
         }
         
@@ -317,7 +317,7 @@ public class ApiConnection {
      * @param dateTo If non-null, return only payments before that day
      * @param clientId If non-null, return only payments relevant to a particular client
      */
-    public Invoices listInvoices(int page, Integer perPage, Date dateFrom, Date dateTo, String clientId, String status) throws ApiException, IOException {
+    public Invoices listInvoices(int page, Integer perPage, Date dateFrom, Date dateTo, Long clientId, String status) throws ApiException, IOException {
         Request request = new Request(RequestMethod.INVOICE_LIST);
         request.setPage(page);
         request.setPerPage(perPage);
@@ -334,7 +334,7 @@ public class ApiConnection {
      * @param dateTo If non-null, return only payments before that day
      * @param clientId If non-null, return only payments relevant to a particular client
      */
-    public Payments listPayments(int page, Integer perPage, Date dateFrom, Date dateTo, String clientId) throws ApiException, IOException {
+    public Payments listPayments(int page, Integer perPage, Date dateFrom, Date dateTo, Long clientId) throws ApiException, IOException {
         Request request = new Request(RequestMethod.PAYMENT_LIST);
         request.setPage(page);
         request.setPerPage(perPage);
@@ -351,7 +351,7 @@ public class ApiConnection {
      * @param dateTo If non-null, return only expenses before that day
      * @param clientId If non-null, return only expenses relevant to a particular client
      */
-    public Expenses listExpenses(int page, Integer perPage, Date dateFrom, Date dateTo, String clientId, String categoryId, String projectId) throws ApiException, IOException {
+    public Expenses listExpenses(int page, Integer perPage, Date dateFrom, Date dateTo, Long clientId, Long categoryId, Long projectId) throws ApiException, IOException {
         Request request = new Request(RequestMethod.EXPENSE_LIST);
         request.setPage(page);
         request.setPerPage(perPage);
@@ -393,28 +393,28 @@ public class ApiConnection {
     /**
      * Fetch the details of a client.
      */
-    public Client getClient(String id) throws ApiException, IOException {
+    public Client getClient(Long id) throws ApiException, IOException {
         return performRequest(new Request(RequestMethod.CLIENT_GET, id)).getClient();
     }
     
     /**
      * Fetch the details of an invoice
      */
-    public Invoice getInvoice(String id) throws ApiException, IOException {
+    public Invoice getInvoice(Long id) throws ApiException, IOException {
         return performRequest(new Request(RequestMethod.INVOICE_GET, id)).getInvoice();
     }
     
     /**
      * Fetch the details of an expense
      */
-    public Expense getExpense(String id) throws ApiException, IOException { 
+    public Expense getExpense(Long id) throws ApiException, IOException { 
         return performRequest(new Request(RequestMethod.EXPENSE_GET, id)).getExpense();
     }
     
     /**
      * Get category details by id
      */
-    public Category getCategory(String id) throws ApiException, IOException {
+    public Category getCategory(Long id) throws ApiException, IOException {
         return performRequest(new Request(RequestMethod.CATEGORY_GET, id)).getCategory();
     }
     

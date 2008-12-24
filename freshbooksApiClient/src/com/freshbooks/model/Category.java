@@ -5,15 +5,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("category")
 public class Category {
     @XStreamAlias("category_id")
-    String id;
+    Long id;
     String name;
     String tax1;
     String tax2;
     
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {

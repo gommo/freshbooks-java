@@ -33,7 +33,7 @@ public class Request extends Message {
     public Request(RequestMethod method) {
         this(method.id);
     }
-    public Request(RequestMethod method, String id) {
+    public Request(RequestMethod method, Long id) {
         this(method.id);
         switch(method) {
         case CLIENT_DELETE:
