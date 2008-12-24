@@ -9,6 +9,7 @@ import com.freshbooks.model.Request;
 import com.freshbooks.model.Response;
 import com.freshbooks.model.ResponseStatus;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.SingleValueConverter;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -19,6 +20,25 @@ public class CustomXStream extends XStream {
     public CustomXStream() {
         super(null, new XppDriver(new XmlFriendlyReplacer("::", "_")));
         registerConverter(new DateConverter("yyyy-MM-dd", new String[0]));
+        registerConverter(new SingleValueConverter() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public boolean canConvert(Class type) {
+                return type.equals(Long.class);
+            }
+            
+            @Override
+            public Object fromString(String str) {
+                if(str.isEmpty())
+                    return null;
+                return Long.valueOf(str, 10);
+            }
+            
+            @Override
+            public String toString(Object obj) {
+                return obj.toString();
+            }
+        });
         processAnnotations(new Class[] {
             Request.class,
             Response.class,
