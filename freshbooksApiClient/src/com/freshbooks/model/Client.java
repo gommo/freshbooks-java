@@ -1,9 +1,13 @@
 package com.freshbooks.model;
 
+import java.io.Serializable;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("client")
-public class Client {
+public class Client implements Serializable {
+    private static final long serialVersionUID = -3744102521802674836L;
+
     @XStreamAlias("client_id")
     Long id;
     
@@ -53,6 +57,8 @@ public class Client {
     String secondaryCountry;
     @XStreamAlias("s_code")
     String secondaryCode;
+    
+    Links links;
     
     public String getFirstName() {
         return firstName;
@@ -199,7 +205,6 @@ public class Client {
         this.id = id;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -329,7 +334,29 @@ public class Client {
                 return false;
         } else if (!workPhone.equals(other.workPhone))
             return false;
+        if(links == null) {
+            if(other.links != null)
+                return false;
+        } else if(!links.equals(other.links))
+            return false;
         return true;
     }
+    public Links getLinks() {
+        return links;
+    }
+    public void setLinks(Links links) {
+        this.links = links;
+    }
     
+    public String getDisplayName() {
+        if(firstName != null && firstName.length() > 0) {
+            if(organization != null && organization.length() > 0) {
+                return firstName+" "+lastName+" - "+organization;
+            } else {
+                return firstName+" "+lastName;
+            }
+        } else {
+            return organization;
+        }
+    }
 }

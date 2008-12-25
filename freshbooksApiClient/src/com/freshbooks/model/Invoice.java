@@ -1,12 +1,15 @@
 package com.freshbooks.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("invoice")
-public class Invoice {
+public class Invoice implements Serializable {
+    private static final long serialVersionUID = -6382862130184354619L;
+
     @XStreamAlias("invoice_id")
     Long id;
     

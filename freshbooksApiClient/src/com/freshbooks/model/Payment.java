@@ -1,11 +1,14 @@
 package com.freshbooks.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("payment")
-public class Payment {
+public class Payment implements Serializable {
+    private static final long serialVersionUID = 4282588370860331356L;
+    
     @XStreamAlias("payment_id")
     Long id;    
     @XStreamAlias("client_id")
