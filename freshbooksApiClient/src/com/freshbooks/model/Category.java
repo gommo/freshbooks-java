@@ -1,9 +1,13 @@
 package com.freshbooks.model;
 
+import java.io.Serializable;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("category")
-public class Category {
+public class Category implements Serializable {
+    private static final long serialVersionUID = 613498591544651289L;
+    
     @XStreamAlias("category_id")
     Long id;
     String name;
