@@ -89,11 +89,15 @@ public class MockApiConnection extends ApiConnection {
             return (Response) xs.fromXML((String)plannedResponse);
         if(plannedResponse instanceof URL)
             plannedResponse = ((URL)plannedResponse).openStream();
+        Response response=null;
         if(plannedResponse instanceof InputStream)
-            return (Response) xs.fromXML((InputStream)plannedResponse);
+            response = (Response) xs.fromXML((InputStream)plannedResponse);
         if(plannedResponse instanceof Response)
-            return (Response) plannedResponse;
-        fail("Bad response object: "+plannedResponse);
-        return null;
+            response = (Response) plannedResponse;
+        if(response == null)
+            fail("Bad response object: "+plannedResponse);
+        if(response.isFail())
+            throw new ApiException(response.getError());
+        return response;
     }
 }
