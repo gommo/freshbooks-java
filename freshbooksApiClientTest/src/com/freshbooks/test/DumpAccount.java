@@ -46,6 +46,7 @@ public class DumpAccount {
                     categoryNames.put(category.getId(), category.getName());
                 }
                 for(Expense expense : con.listExpenses(null, null, null, null, null, null)) {
+                    expense = con.getExpense(expense.getId());
                     System.out.println("Found expense "+expense.getId()+" with amount "+expense.getAmount()+" and category "+categoryNames.get(expense.getCategoryId()));
                 }
             } catch(Error e) {
