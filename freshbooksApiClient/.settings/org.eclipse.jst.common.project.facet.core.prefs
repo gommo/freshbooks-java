@@ -1,3 +1,4 @@
-#Wed Dec 10 20:19:48 PST 2008
+#Mon Jan 26 12:37:08 PST 2009
 classpath.helper/org.eclipse.jdt.launching.JRE_CONTAINER\:\:org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType\:\:jdk1.6.0_10/owners=jst.java\:6.0
+classpath.helper/org.eclipse.jst.server.core.container\:\:com.sun.enterprise.jst.server.runtimeTarget\:\:GlassFish\ v2\ Java\ EE\ 5/owners=jst.utility\:1.0
 eclipse.preferences.version=1
