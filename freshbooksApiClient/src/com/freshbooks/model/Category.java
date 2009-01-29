@@ -14,6 +14,14 @@ public class Category implements Serializable {
     String tax1;
     String tax2;
     
+    public Category() {
+    }
+    
+    public Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
