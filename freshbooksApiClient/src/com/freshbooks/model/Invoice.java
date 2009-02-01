@@ -25,7 +25,7 @@ public class Invoice implements Serializable {
     @XStreamAlias("po_number")
     String poNumber;
     
-    Integer discount;
+    Double discount;
     String notes;
     String terms;
     
@@ -97,10 +97,10 @@ public class Invoice implements Serializable {
     public void setPoNumber(String poNumber) {
         this.poNumber = poNumber;
     }
-    public Integer getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
     public String getNotes() {
