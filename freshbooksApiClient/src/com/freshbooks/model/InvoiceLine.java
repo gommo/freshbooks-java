@@ -149,5 +149,9 @@ public class InvoiceLine implements Serializable {
             return false;
         return true;
     }
+
+    public boolean isBlank() {
+        return (amount == 0 && description.length()==0 && name.length()==0);
+    }
     
 }
