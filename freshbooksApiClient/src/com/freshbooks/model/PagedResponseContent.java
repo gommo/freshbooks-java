@@ -66,6 +66,7 @@ public class PagedResponseContent<T> implements Iterable<T> {
     }
 
     public boolean add(T e) {
+        if(contents == null) contents = new ArrayList<T>();
         return contents.add(e);
     }
 
