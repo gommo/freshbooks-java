@@ -18,8 +18,6 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import com.freshbooks.model.Categories;
 import com.freshbooks.model.Category;
 import com.freshbooks.model.Client;
@@ -260,7 +258,7 @@ public class ApiConnection {
         
         @Override
         public void remove() {
-            throw new NotImplementedException();
+            throw new UnsupportedOperationException();
         }
     }
     
