@@ -11,6 +11,7 @@ import com.freshbooks.model.Category;
 import com.freshbooks.model.Client;
 import com.freshbooks.model.Expense;
 import com.freshbooks.model.Invoice;
+import com.freshbooks.model.Item;
 import com.freshbooks.model.Payment;
 
 public class DumpAccount {
@@ -48,6 +49,9 @@ public class DumpAccount {
                 for(Expense expense : con.listExpenses(null, null, null, null, null, null)) {
                     expense = con.getExpense(expense.getId());
                     System.out.println("Found expense "+expense.getId()+" with amount "+expense.getAmount()+" and category "+categoryNames.get(expense.getCategoryId()));
+                }
+                for(Item item : con.listItems()) {
+                    System.out.println("Found item "+item.getId()+" with name "+item.getName()+" and description "+item.getDescription());
                 }
             } catch(Error e) {
                 if(e.getCause() instanceof ApiException) {
