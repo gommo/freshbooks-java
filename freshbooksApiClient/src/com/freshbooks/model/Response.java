@@ -32,7 +32,10 @@ public class Response extends Message {
         status = ResponseStatus.ok;
         setExpenses(expenses);
     }
-    
+    public Response(Items items) {
+        status = ResponseStatus.ok;
+        setItems(items);
+    }
     public ResponseStatus getStatus() {
         return status;
     }

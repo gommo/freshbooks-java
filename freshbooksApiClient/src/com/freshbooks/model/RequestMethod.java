@@ -30,7 +30,13 @@ public enum RequestMethod {
     PAYMENT_UPDATE("payment.update"),
     PAYMENT_GET("payment.get"),
     PAYMENT_DELETE("payment.delete"),
-    PAYMENT_LIST("payment.list");
+    PAYMENT_LIST("payment.list"),
+    
+    ITEM_CREATE("item.create"),
+    ITEM_UPDATE("item.update"),
+    ITEM_GET("item.get"),
+    ITEM_DELETE("item.delete"),
+    ITEM_LIST("item.list");
     
     final String id;
 

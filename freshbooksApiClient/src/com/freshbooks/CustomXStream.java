@@ -39,6 +39,25 @@ public class CustomXStream extends XStream {
                 return obj.toString();
             }
         });
+        registerConverter(new SingleValueConverter() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public boolean canConvert(Class type) {
+                return type.equals(Double.class);
+            }
+            
+            @Override
+            public Object fromString(String str) {
+                if(str.isEmpty())
+                    return null;
+                return Double.valueOf(str);
+            }
+            
+            @Override
+            public String toString(Object obj) {
+                return obj.toString();
+            }
+        });
         processAnnotations(new Class[] {
             Request.class,
             Response.class,

@@ -56,6 +56,10 @@ public class Request extends Message {
         case CATEGORY_GET:
             this.categoryId = id;
             break;
+        case ITEM_DELETE:
+        case ITEM_GET:
+            this.itemId = id;
+            break;
         default:
             throw new UnsupportedOperationException("Don't know what to do with an id for method "+method);
         }

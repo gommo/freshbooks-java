@@ -32,6 +32,11 @@ public class Message {
     protected Category category;
     protected Categories categories;
     
+    @XStreamAlias("item_id")
+    protected Long itemId;
+    protected Item item;
+    protected Items items;
+    
     @XStreamAlias("project_id")
     protected Long projectId;
     
@@ -173,6 +178,30 @@ public class Message {
 
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
+    }
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Items getItems() {
+        return items;
+    }
+
+    public void setItems(Items items) {
+        this.items = items;
     }
     
 }

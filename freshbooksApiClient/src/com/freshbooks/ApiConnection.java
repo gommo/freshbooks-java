@@ -26,6 +26,7 @@ import com.freshbooks.model.Expense;
 import com.freshbooks.model.Expenses;
 import com.freshbooks.model.Invoice;
 import com.freshbooks.model.Invoices;
+import com.freshbooks.model.Items;
 import com.freshbooks.model.PagedResponseContent;
 import com.freshbooks.model.Payment;
 import com.freshbooks.model.Payments;
@@ -386,6 +387,13 @@ public class ApiConnection {
      */
     public Categories listCategories() throws ApiException, IOException {
         return performRequest(new Request(RequestMethod.CATEGORY_LIST)).getCategories();
+    }
+    
+    /**
+     * Get all the categories defined
+     */
+    public Items listItems() throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.ITEM_LIST)).getItems();
     }
     
     /**
