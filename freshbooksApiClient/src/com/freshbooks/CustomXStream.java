@@ -1,6 +1,8 @@
 package com.freshbooks;
 
 
+import java.util.Date;
+
 import com.freshbooks.model.Client;
 import com.freshbooks.model.Clients;
 import com.freshbooks.model.Invoice;
@@ -56,6 +58,17 @@ public class CustomXStream extends XStream {
             @Override
             public String toString(Object obj) {
                 return obj.toString();
+            }
+        });
+        registerConverter(new DateConverter(true) {
+            @Override
+            public Object fromString(String str) {
+                // FreshBooks returns these bogus dates sometimes ... no idea why.
+                // We'll treat them as a "zero", but use 1970 Jan 1 instead
+                if(str.startsWith("0000-")) {
+                    return new Date(0);
+                }
+                return super.fromString(str);
             }
         });
         processAnnotations(new Class[] {
