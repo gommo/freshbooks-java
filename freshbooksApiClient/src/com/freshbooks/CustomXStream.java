@@ -60,7 +60,7 @@ public class CustomXStream extends XStream {
                 return obj.toString();
             }
         });
-        registerConverter(new DateConverter("yyyy-MM-dd HH:mm:ss", new String[] {"yyyy-MM-dd"}, true) {
+        registerConverter(new DateConverter("yyyy-MM-dd", new String[0], true) {
             @Override
             public Object fromString(String str) {
                 // FreshBooks returns these bogus dates sometimes ... no idea why.
