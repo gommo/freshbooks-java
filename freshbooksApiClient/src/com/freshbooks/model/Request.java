@@ -72,6 +72,10 @@ public class Request extends Message {
         this(method.id);
         this.invoice = invoice;
     }
+    public Request(RequestMethod method, Item item) {
+        this(method.id);
+        this.item = item;
+    }
     public Request(String method) {
         this.method = method;
     }

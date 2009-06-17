@@ -26,6 +26,7 @@ import com.freshbooks.model.Expense;
 import com.freshbooks.model.Expenses;
 import com.freshbooks.model.Invoice;
 import com.freshbooks.model.Invoices;
+import com.freshbooks.model.Item;
 import com.freshbooks.model.Items;
 import com.freshbooks.model.PagedResponseContent;
 import com.freshbooks.model.Payment;
@@ -115,6 +116,14 @@ public class ApiConnection {
         return performRequest(new Request(RequestMethod.INVOICE_CREATE, invoice)).getInvoiceId();
     }
 
+    public Long createItem(Item item) throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.ITEM_CREATE, item)).getItemId();
+    }
+    
+    public Long createClient(Client client) throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.CLIENT_CREATE, client)).getClientId();
+    }
+    
     public URL getUrl() {
         return url;
     }
@@ -206,6 +215,20 @@ public class ApiConnection {
         };
     }
     
+    public Iterable<Item> listItems(final Integer perPage) {
+        return new Iterable<Item>() {
+            @Override
+            public Iterator<Item> iterator() {
+                try {
+                    return new ItemsIterator(perPage);
+                } catch (ApiException e) {
+                    throw new Error(e);
+                } catch (IOException e) {
+                    throw new Error(e);
+                }
+            }
+        };
+    }
     abstract class RecordsIterator<T> implements Iterator<T> {
         PagedResponseContent<T> current;
         Iterator<T> currentIterator;
@@ -308,6 +331,18 @@ public class ApiConnection {
             return listClients(page, perPage, username, email);
         }
     }
+
+    class ItemsIterator extends RecordsIterator<Item> {
+
+        private ItemsIterator(Integer perPage) throws ApiException, IOException {
+            super(perPage, null, null, null, null, null, null, null, null);
+        }
+        
+        @Override
+        protected PagedResponseContent<Item> list(int page) throws ApiException, IOException {
+            return listItems(page, perPage);
+        }
+    }
     
     /**
      * Return a list of invoices.
@@ -392,8 +427,11 @@ public class ApiConnection {
     /**
      * Get all the categories defined
      */
-    public Items listItems() throws ApiException, IOException {
-        return performRequest(new Request(RequestMethod.ITEM_LIST)).getItems();
+    public Items listItems(int page, Integer perPage) throws ApiException, IOException {
+        final Request request = new Request(RequestMethod.ITEM_LIST);
+        request.setPerPage(perPage);
+        request.setPage(page);
+        return performRequest(request).getItems();
     }
     
     /**
@@ -430,5 +468,8 @@ public class ApiConnection {
 
     public void setDebug(boolean debug) {
         this.debug = debug;
+    }
+    public void updateItem(Item item) throws ApiException, IOException {
+        performRequest(new Request(RequestMethod.ITEM_UPDATE, item));
     }
 }
