@@ -1,9 +1,6 @@
 package com.freshbooks;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -35,6 +32,7 @@ import com.freshbooks.model.Request;
 import com.freshbooks.model.RequestMethod;
 import com.freshbooks.model.Response;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.mapper.CannotResolveClassException;
 
 public class ApiConnection {
     static final Logger logger = LoggerFactory.getLogger(ApiConnection.class);
@@ -88,16 +86,16 @@ public class ApiConnection {
                 if(debug) {
                     logger.info("POST "+url+":\n"+paramString+"\nYields:\n"+method.getResponseBodyAsString());
                 }
-                InputStream is = method.getResponseBodyAsStream();
+                String is = method.getResponseBodyAsString();
                 try {
-                    Response response = (Response)xs.fromXML(new BufferedReader(new InputStreamReader(is, "utf8")));
+                    Response response = (Response)xs.fromXML(is);
                     // TODO Throw an error if we got one
                     if(response.isFail()) {
                         throw new ApiException(response.getError());
                     }
                     return response;
-                } finally {
-                    if(is != null) is.close();
+                } catch(CannotResolveClassException cnrce) {
+                    throw new ApiException("Error while parsing response from FreshBooks: "+cnrce.toString()+"; response body: "+is);
                 }
             } finally {
                 method.releaseConnection();
