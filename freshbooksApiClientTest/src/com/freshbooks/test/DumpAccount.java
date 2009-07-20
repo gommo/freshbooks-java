@@ -3,6 +3,8 @@ package com.freshbooks.test;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 
 import com.freshbooks.ApiConnection;
@@ -18,8 +20,9 @@ public class DumpAccount {
 
     /**
      * @param args
+     * @throws ParseException 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         if(args.length == 0) {
             System.out.println("Usage: dump URL API-KEY");
             return;
@@ -46,11 +49,11 @@ public class DumpAccount {
                     System.out.println("Found category "+category.getId()+": "+category.getName());
                     categoryNames.put(category.getId(), category.getName());
                 }
-                for(Expense expense : con.listExpenses(null, null, null, null, null, null)) {
+                for(Expense expense : con.listExpenses(null, new Date(109,0,1), null, null, null, null)) {
                     expense = con.getExpense(expense.getId());
                     System.out.println("Found expense "+expense.getId()+" with amount "+expense.getAmount()+" and category "+categoryNames.get(expense.getCategoryId()));
                 }
-                for(Item item : con.listItems()) {
+                for(Item item : con.listItems(25)) {
                     System.out.println("Found item "+item.getId()+" with name "+item.getName()+" and description "+item.getDescription());
                 }
             } catch(Error e) {
