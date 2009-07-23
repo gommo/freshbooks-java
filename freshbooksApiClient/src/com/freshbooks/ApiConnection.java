@@ -82,9 +82,14 @@ public class ApiConnection {
                 method.addRequestHeader("User-Agent", userAgent);
                 //method.addRequestHeader("Authorization", base64key);
                 method.setRequestEntity(new StringRequestEntity(paramString, "text/xml", "utf-8"));
+                method.getParams().setContentCharset("utf-8");
+                
                 getClient().executeMethod(method);
                 if(debug) {
-                    logger.info("POST "+url+":\n"+paramString+"\nYields:\n"+method.getResponseBodyAsString());
+                    logger.info("POST "+url+":\n"+paramString
+                        +"\nYields "+method.getResponseContentLength()
+                        +" bytes of "+method.getResponseCharSet()+" data:\n"+
+                        method.getResponseBodyAsString());
                 }
                 String is = method.getResponseBodyAsString();
                 try {
