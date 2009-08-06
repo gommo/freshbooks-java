@@ -15,7 +15,15 @@
 	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes><exclude>**/.svn/**</exclude></excludes>
+			</resource>
+	    </resources>	
 		<testSourceDirectory>test</testSourceDirectory>
+	    <outputDirectory>${basedir}/${target.dir}/classes</outputDirectory>
+	    <testOutputDirectory>${basedir}/${target.dir}/test-classes</testOutputDirectory>
 		
 		<plugins>
 			<plugin>
@@ -60,4 +68,10 @@
 			<version>1.5.8</version>
 		</dependency>
 	</dependencies>
+	
+	<properties>
+		<target.dir>target</target.dir>
+	</properties>
+
+	
 </project>
