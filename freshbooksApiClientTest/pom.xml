@@ -16,6 +16,8 @@
 	<build>
 		<sourceDirectory>src-na</sourceDirectory>
 		<testSourceDirectory>src</testSourceDirectory>
+    <outputDirectory>${basedir}/${target.dir}/classes</outputDirectory>
+    <testOutputDirectory>${basedir}/${target.dir}/test-classes</testOutputDirectory>
 		
 		<plugins>
 			<plugin>
@@ -41,4 +43,9 @@
 		</dependency>
 
 	</dependencies>
+	
+	<properties>
+		<target.dir>target</target.dir>
+	</properties>
+	
 </project>
