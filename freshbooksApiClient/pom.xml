@@ -12,19 +12,13 @@
 	<name>freshbooksApiClient</name>
 	<description>Client library to access the freshbooks API from java programs</description>
 	
+	<properties>
+		<target.dir>.target</target.dir>
+ 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<excludes><exclude>**/.svn/**</exclude></excludes>
-			</resource>
-	    </resources>	
-		<testSourceDirectory>test</testSourceDirectory>
-	    <outputDirectory>${basedir}/${target.dir}/classes</outputDirectory>
-	    <testOutputDirectory>${basedir}/${target.dir}/test-classes</testOutputDirectory>
-		
+		<directory>${target.dir}</directory>		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -80,11 +74,6 @@
 			<version>1.5.8</version>
 		</dependency>
 	</dependencies>
-	
-	<properties>
-		<target.dir>target</target.dir>
- 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	
 </project>
