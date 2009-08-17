@@ -83,6 +83,7 @@
 	
 	<properties>
 		<target.dir>target</target.dir>
+ 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	
