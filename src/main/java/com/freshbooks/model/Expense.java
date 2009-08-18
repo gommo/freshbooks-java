@@ -24,6 +24,8 @@ public class Expense implements Serializable {
     String status;
     Date date;
     
+    String vendor;
+    
     @XStreamAlias("tax1_name")
     String tax1Name;
     @XStreamAlias("tax1_percent")
@@ -130,6 +132,12 @@ public class Expense implements Serializable {
     }
 
 
+    public String getVendor() {
+        return vendor;
+    }
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -213,6 +221,11 @@ public class Expense implements Serializable {
             if (other.tax2Percent != null)
                 return false;
         } else if (!tax2Percent.equals(other.tax2Percent))
+            return false;
+        if (vendor == null) {
+            if (other.vendor != null)
+                return false;
+        } else if (!vendor.equals(other.vendor))
             return false;
         return true;
     }
