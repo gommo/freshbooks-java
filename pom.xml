@@ -15,6 +15,7 @@
 	<properties>
 		<target.dir>.target</target.dir>
  	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gwt.version>1.7.0</gwt.version>
 	</properties>
 	
 	<build>
@@ -61,10 +62,41 @@
 			           </goals>
 			        </execution>
 			    </executions>
-			</plugin>			
+			</plugin>
+	      <plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>gwt-maven-plugin</artifactId>
+	        <version>1.2-SNAPSHOT</version>
+	        <executions>
+	          <!-- GWT version detected from dependencyManagement -->
+	          <execution>
+	            <goals>
+	              <goal>generateAsync</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+	        <configuration>
+                <servicePattern>**/*Integration.java</servicePattern>
+	        </configuration>
+	      </plugin>				
 		</plugins>	
 	</build>
 	<dependencies>
+		<!-- GWT dependencies (from maven "central" repo) -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+			
+	
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
