@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Aug 22, 2009 9:37:14 PM                                                        
+
+     freshbooksApiClient    
+     Library for GWT with many features
+                   
+     dobes                                                                
+     ====================================================================== -->
+<project name="freshbooksApiClient" default="publish" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<property name="lib.version" value="1.0"/>
+	<property name="gwt.version" value="1.7.0"/>
+	<property name="publish.target" value="local"/>
+	
+    <description>
+            Java client code for freshbooks.com API
+    </description>
+	
+	<target name="publish" depends="jar">
+		<ivy:publish resolver="${publish.target}" pubrevision="${lib.version}" conf="deploy" artifactspattern="[artifact]-[revision].[ext]" overwrite="true"/>
+	</target>
+		
+    <!-- ================================= 
+          target: jar              
+         ================================= -->
+    <target name="jar" depends="compile" description="Library for GWT with many features">
+        <jar destfile="freshbooksApiClient-${lib.version}.jar">
+        	<fileset dir="bin/classes"/>
+        	<fileset dir="src/main/java">
+        		<include name="**/model/**"/>
+        		<include name="**/*.gwt.xml"/>
+        	</fileset>
+        </jar>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: compile                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="compile" depends="resolve-deps">
+    	<!-- Remove class files if the java sources change -->
+    	<dependset>
+    		<srcfileset dir="src/main/java" includes="**/*.java"/>
+    		<targetfileset dir="bin/classes" includes="**/*.class"/>
+    	</dependset>
+    	
+    	<ivy:cachepath pathid="classpath.compile" conf="compile" />
+    	<mkdir dir="bin/classes"/>
+    	<javac srcdir="src/main/java"
+         destdir="bin/classes"
+         debug="on"
+    	 classpathref="classpath.compile"/>
+    	
+    </target>
+
+	<target name="resolve-deps">
+		<taskdef resource="org/apache/ivy/ant/antlib.xml"
+		    	 uri="antlib:org.apache.ivy.ant"
+			     classpath="lib/ivy-2.1.0-rc2.jar"/> 
+	</target>
+		
+	<target name="retrieve-deps">
+		<ivy:retrieve sync="true" pattern="lib/[conf]/[artifact].[ext]"/>
+	</target>
+</project>
