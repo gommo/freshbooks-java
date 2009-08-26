@@ -8,7 +8,6 @@
      dobes                                                                
      ====================================================================== -->
 <project name="freshbooksApiClient" default="publish" xmlns:ivy="antlib:org.apache.ivy.ant">
-	<property name="lib.version" value="1.0"/>
 	<property name="gwt.version" value="1.7.0"/>
 	<property name="publish.target" value="local"/>
 	
@@ -17,15 +16,15 @@
     </description>
 	
 	<target name="publish" depends="jar">
-		<ivy:publish resolver="${publish.target}" pubrevision="${lib.version}" conf="deploy" artifactspattern="[artifact]-[revision].[ext]" overwrite="true"/>
+		<ivy:publish resolver="${publish.target}" pubrevision="${ivy.revision}" artifactspattern="build/[artifact]-[revision].[ext]" update="true" overwrite="true" forcedeliver="true"/>
 	</target>
 		
     <!-- ================================= 
           target: jar              
          ================================= -->
     <target name="jar" depends="compile" description="Library for GWT with many features">
-        <jar destfile="freshbooksApiClient-${lib.version}.jar">
-        	<fileset dir="bin/classes"/>
+        <jar destfile="build/${ivy.module}-${ivy.reversion}.jar">
+        	<fileset dir="build/classes"/>
         	<fileset dir="src/main/java">
         		<include name="**/model/**"/>
         		<include name="**/*.gwt.xml"/>
@@ -40,18 +39,23 @@
     	<!-- Remove class files if the java sources change -->
     	<dependset>
     		<srcfileset dir="src/main/java" includes="**/*.java"/>
-    		<targetfileset dir="bin/classes" includes="**/*.class"/>
+    		<targetfileset dir="build/classes" includes="**/*.class"/>
     	</dependset>
     	
     	<ivy:cachepath pathid="classpath.compile" conf="compile" />
-    	<mkdir dir="bin/classes"/>
+    	<mkdir dir="build/classes"/>
     	<javac srcdir="src/main/java"
-         destdir="bin/classes"
+         destdir="build/classes"
          debug="on"
     	 classpathref="classpath.compile"/>
     	
     </target>
 
+	<target name="output-dep-tree" depends="resolve-deps">
+    	<mkdir dir="build/deps"/>
+		<ivy:report todir="build/deps"/>
+	</target>
+		
 	<target name="resolve-deps">
 		<taskdef resource="org/apache/ivy/ant/antlib.xml"
 		    	 uri="antlib:org.apache.ivy.ant"

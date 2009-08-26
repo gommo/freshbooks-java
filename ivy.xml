@@ -2,17 +2,18 @@
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
     <info
-        organisation="com.habitsoft"
+        organisation="com.freshbooks"
         module="freshbooksApiClient"
-        status="integration">
+        status="integration"
+        revision="1.0">
 	</info>
 	<configurations>
 		<conf name="deploy" description="Dependencies needed to run during deployment"/>
 		<conf name="compile" extends="deploy" description="Deps needed for compilation, but not necessarily for deployment"/>
 		<conf name="test" extends="compile" description="Deps needed for testing but not necessarily for compilation or deployment"/>
 	</configurations>
-	<dependencies defaultconf="deploy->*" defaultconfmapping="*">
-		<dependency org="com.thoughtworks.xstream" name="xstream" rev="1.3"/>
+	<dependencies defaultconf="deploy->*">
+		<dependency org="com.thoughtworks.xstream" name="xstream" rev="1.3" conf="*->master"/>
 		<dependency org="commons-httpclient" name="commons-httpclient" rev="3.1"/>
 		<dependency org="commons-codec" name="commons-codec" rev="1.3"/>
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.5.6"/>
