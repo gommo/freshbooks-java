@@ -24,7 +24,6 @@
 	
 	<target name="publish" depends="jar,version">
 		<ivy:publish resolver="${publish.target}"
-			         revision="${ivy.revision}"
 			         pubrevision="${ivy.new.revision}"
 			         artifactspattern="build/[artifact]-${ivy.revision}.[ext]"
 			         update="true"
