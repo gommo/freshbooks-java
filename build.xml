@@ -15,8 +15,21 @@
             Java client code for freshbooks.com API
     </description>
 	
-	<target name="publish" depends="jar">
-		<ivy:publish resolver="${publish.target}" pubrevision="${ivy.revision}" artifactspattern="build/[artifact]-[revision].[ext]" update="true" overwrite="true" forcedeliver="true"/>
+    <target name="version">
+		<tstamp>
+			<format property="now" pattern="yyyyMMddHHmmss"/>
+		</tstamp>
+        <property name="ivy.new.revision" value="${ivy.revision}.${now}"/>
+    </target>
+	
+	<target name="publish" depends="jar,version">
+		<ivy:publish resolver="${publish.target}"
+			         revision="${ivy.revision}"
+			         pubrevision="${ivy.new.revision}"
+			         artifactspattern="build/[artifact]-${ivy.revision}.[ext]"
+			         update="true"
+			         overwrite="true"
+			         forcedeliver="true"/>
 	</target>
 		
     <!-- ================================= 
