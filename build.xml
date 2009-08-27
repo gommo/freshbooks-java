@@ -3,7 +3,7 @@
      Aug 22, 2009 9:37:14 PM                                                        
 
      freshbooksApiClient    
-     Library for GWT with many features
+     Java client library for freshbooks.com API
                    
      dobes                                                                
      ====================================================================== -->
@@ -35,8 +35,8 @@
     <!-- ================================= 
           target: jar              
          ================================= -->
-    <target name="jar" depends="compile" description="Library for GWT with many features">
-        <jar destfile="build/${ivy.module}-${ivy.reversion}.jar">
+    <target name="jar" depends="compile" description="Java client library for freshbooks.com API">
+        <jar destfile="build/${ivy.module}-${ivy.revision}.jar">
         	<fileset dir="build/classes"/>
         	<fileset dir="src/main/java">
         		<include name="**/model/**"/>
