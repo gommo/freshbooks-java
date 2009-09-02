@@ -47,7 +47,7 @@
     <!-- - - - - - - - - - - - - - - - - - 
           target: compile                      
          - - - - - - - - - - - - - - - - - -->
-    <target name="compile" depends="resolve-deps">
+    <target name="compile" depends="resolve-deps" unless="skip-compile">
     	<!-- Remove class files if the java sources change -->
     	<dependset>
     		<srcfileset dir="src/main/java" includes="**/*.java"/>
