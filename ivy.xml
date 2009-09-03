@@ -22,6 +22,6 @@
 		<dependency org="xpp3" name="xpp3" rev="1.1.4c"/>
 		<dependency org="xerces" name="xercesImpl" rev="2.8.1"/>
 		
-		<dependency org="junit" name="junit" rev="4.6" conf="compile;sources"/> <!-- Should be test, except for MockApiConnection uses it and isn't in src/test :( -->
+		<dependency org="junit" name="junit" rev="4.6" conf="compile->master;sources"/> <!-- Should be test, except for MockApiConnection uses it and isn't in src/test :( -->
 	</dependencies>
 </ivy-module>
