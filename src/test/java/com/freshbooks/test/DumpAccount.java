@@ -35,11 +35,11 @@ public class DumpAccount {
             try {
                 for(Client client : con.listClients(null, null, null)) {
                     System.out.println("Found client "+client.getFirstName()+" "+client.getLastName()+" at "+client.getOrganization());
-                    con.getClient(client.getId());
+                    //con.getClient(client.getId());
                 }
                 for(Invoice invoice : con.listInvoices(null, null, null, null, null)) {
                     System.out.println("Found invoice "+invoice.getId()+" with amount "+invoice.getAmount());
-                    con.getInvoice(invoice.getId());
+                    //con.getInvoice(invoice.getId());
                 }
                 for(Payment payment : con.listPayments(null, null, null, null)) {
                     System.out.println("Found payment "+payment.getId()+" on invoice "+payment.getInvoiceId()+" with amount "+payment.getAmount());
@@ -50,7 +50,7 @@ public class DumpAccount {
                     categoryNames.put(category.getId(), category.getName());
                 }
                 for(Expense expense : con.listExpenses(null, new Date(109,0,1), null, null, null, null)) {
-                    expense = con.getExpense(expense.getId());
+                    //expense = con.getExpense(expense.getId());
                     System.out.println("Found expense "+expense.getId()+" with amount "+expense.getAmount()+" and category "+categoryNames.get(expense.getCategoryId()));
                 }
                 for(Item item : con.listItems(25)) {
