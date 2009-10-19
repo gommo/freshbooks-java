@@ -1,6 +1,8 @@
 package com.freshbooks;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -12,6 +14,7 @@ import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,13 +88,15 @@ public class ApiConnection {
                 method.getParams().setContentCharset("utf-8");
                 
                 getClient().executeMethod(method);
+                InputStream is = method.getResponseBodyAsStream();
                 if(debug) {
+                	byte[] bytes = IOUtils.toByteArray(is);
                     logger.info("POST "+url+":\n"+paramString
                         +"\nYields "+method.getResponseContentLength()
                         +" bytes of "+method.getResponseCharSet()+" data:\n"+
-                        method.getResponseBodyAsString());
+                        new String(bytes, method.getResponseCharSet()));
+                    is = new ByteArrayInputStream(bytes);
                 }
-                String is = method.getResponseBodyAsString();
                 try {
                     Response response = (Response)xs.fromXML(is);
                     // TODO Throw an error if we got one
