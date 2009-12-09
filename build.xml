@@ -59,6 +59,7 @@
     	<javac srcdir="src/main/java"
          destdir="build/classes"
          debug="on"
+    	 encoding="UTF-8"
     	 classpathref="classpath.compile"/>
     	
     </target>
