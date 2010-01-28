@@ -29,6 +29,9 @@ public class Invoice implements Serializable {
     String notes;
     String terms;
     
+    @XStreamAlias("currency_code")
+    String currencyCode;
+    
     @XStreamAlias("first_name")
     String firstName;
     
@@ -223,6 +226,12 @@ public class Invoice implements Serializable {
     public void setLinks(Links links) {
         this.links = links;
     }
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
 
 
     @Override
@@ -364,6 +373,11 @@ public class Invoice implements Serializable {
             if (other.terms != null)
                 return false;
         } else if (!terms.equals(other.terms))
+            return false;
+        if (currencyCode == null) {
+            if (other.currencyCode != null)
+                return false;
+        } else if (!currencyCode.equals(other.currencyCode))
             return false;
         if (url == null) {
             if (other.url != null)
