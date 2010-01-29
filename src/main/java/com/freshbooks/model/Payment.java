@@ -18,6 +18,9 @@ public class Payment implements Serializable {
     
     double amount;
     
+    @XStreamAlias("currency_code")
+    String currencyCode;
+    
     Date date;
     
     String type;
@@ -80,6 +83,15 @@ public class Payment implements Serializable {
         this.amount = amount;
     }
 
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -90,6 +102,11 @@ public class Payment implements Serializable {
             return false;
         Payment other = (Payment) obj;
         if (amount != other.amount)
+            return false;
+        if (currencyCode == null) {
+            if (other.currencyCode != null)
+                return false;
+        } else if (!currencyCode.equals(other.currencyCode))
             return false;
         if (clientId == null) {
             if (other.clientId != null)
@@ -123,6 +140,5 @@ public class Payment implements Serializable {
             return false;
         return true;
     }
-    
     
 }
