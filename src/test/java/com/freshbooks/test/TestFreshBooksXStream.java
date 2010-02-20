@@ -1,5 +1,6 @@
 package com.freshbooks.test;
 
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -35,7 +36,9 @@ public class TestFreshBooksXStream extends Assert {
     @Test
     public void loadSaveInvoiceWithExtraTags1() {
         XStream xs = new CustomXStream();
-        Response response = (Response)xs.fromXML(getClass().getResourceAsStream("test_invoice_response_extra_tags_1.xml"));
+        InputStream stream = getClass().getResourceAsStream("test_invoice_response_extra_tags_1.xml");
+        assertNotNull(stream);
+		Response response = (Response)xs.fromXML(stream);
         String str = xs.toXML(response);
         System.out.println(str);
     }
