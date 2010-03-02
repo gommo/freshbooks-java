@@ -34,27 +34,27 @@ public class DumpAccount {
             con.setDebug(true);
             try {
                 for(Client client : con.listClients(null, null, null)) {
-                    System.out.println("Found client "+client.getFirstName()+" "+client.getLastName()+" at "+client.getOrganization());
+                    //System.out.println("Found client "+client.getFirstName()+" "+client.getLastName()+" at "+client.getOrganization());
                     //con.getClient(client.getId());
                 }
                 for(Invoice invoice : con.listInvoices(null, null, null, null, null)) {
-                    System.out.println("Found invoice "+invoice.getId()+" with amount "+invoice.getAmount());
+                    //System.out.println("Found invoice "+invoice.getId()+" with amount "+invoice.getAmount());
                     //con.getInvoice(invoice.getId());
                 }
                 for(Payment payment : con.listPayments(null, null, null, null)) {
-                    System.out.println("Found payment "+payment.getId()+" on invoice "+payment.getInvoiceId()+" with amount "+payment.getAmount());
+                    //System.out.println("Found payment "+payment.getId()+" on invoice "+payment.getInvoiceId()+" with amount "+payment.getAmount());
                 }
                 HashMap<Long,String> categoryNames = new HashMap<Long, String>();
                 for(Category category : con.listCategories()) {
-                    System.out.println("Found category "+category.getId()+": "+category.getName());
-                    categoryNames.put(category.getId(), category.getName());
+                    //System.out.println("Found category "+category.getId()+": "+category.getName());
+                    //categoryNames.put(category.getId(), category.getName());
                 }
                 for(Expense expense : con.listExpenses(null, new Date(109,0,1), null, null, null, null)) {
                     //expense = con.getExpense(expense.getId());
-                    System.out.println("Found expense "+expense.getId()+" with amount "+expense.getAmount()+" and category "+categoryNames.get(expense.getCategoryId()));
+                    //System.out.println("Found expense "+expense.getId()+" with amount "+expense.getAmount()+" and category "+categoryNames.get(expense.getCategoryId()));
                 }
                 for(Item item : con.listItems(25)) {
-                    System.out.println("Found item "+item.getId()+" with name "+item.getName()+" and description "+item.getDescription());
+                    //System.out.println("Found item "+item.getId()+" with name "+item.getName()+" and description "+item.getDescription());
                 }
             } catch(Error e) {
                 if(e.getCause() instanceof ApiException) {
