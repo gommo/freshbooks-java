@@ -60,6 +60,10 @@ public class Request extends Message {
         case ITEM_GET:
             this.itemId = id;
             break;
+        case CALLBACK_DELETE:
+        case CALLBACK_RESEND_TOKEN:
+        	this.callbackId = id;
+        	break;
         default:
             throw new UnsupportedOperationException("Don't know what to do with an id for method "+method);
         }
@@ -75,6 +79,14 @@ public class Request extends Message {
     public Request(RequestMethod method, Item item) {
         this(method.id);
         this.item = item;
+    }
+    public Request(RequestMethod method, Callback callback) {
+        this(method.id);
+        this.callback = callback;
+    }
+    public Request(RequestMethod method, Payment payment) {
+        this(method.id);
+        this.payment = payment;
     }
     public Request(String method) {
         this.method = method;

@@ -36,7 +36,13 @@ public enum RequestMethod {
     ITEM_UPDATE("item.update"),
     ITEM_GET("item.get"),
     ITEM_DELETE("item.delete"),
-    ITEM_LIST("item.list");
+    ITEM_LIST("item.list"),
+    
+    CALLBACK_CREATE("callback.create"),
+    CALLBACK_VERIFY("callback.verify"),
+    CALLBACK_RESEND_TOKEN("callback.resendToken"),
+    CALLBACK_LIST("callback.list"),
+    CALLBACK_DELETE("callback.delete");
     
     final String id;
 

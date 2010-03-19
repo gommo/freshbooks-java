@@ -18,6 +18,8 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.freshbooks.model.Callback;
+import com.freshbooks.model.Callbacks;
 import com.freshbooks.model.Categories;
 import com.freshbooks.model.Category;
 import com.freshbooks.model.Client;
@@ -130,6 +132,14 @@ public class ApiConnection {
     
     public Long createClient(Client client) throws ApiException, IOException {
         return performRequest(new Request(RequestMethod.CLIENT_CREATE, client)).getClientId();
+    }
+    
+    public Long createCallback(Callback callback) throws ApiException, IOException {
+		return performRequest(new Request(RequestMethod.CALLBACK_CREATE, callback)).getCallbackId();
+	}
+    
+    public Long createPayment(Payment payment) throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.PAYMENT_CREATE, payment)).getPaymentId();
     }
     
     public URL getUrl() {
@@ -443,6 +453,13 @@ public class ApiConnection {
     }
     
     /**
+     * Get all the callbacks defined
+     */
+    public Callbacks listCallbacks() throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.CALLBACK_LIST)).getCallbacks();
+    }
+    
+    /**
      * Fetch the details of a client.
      */
     public Client getClient(Long id) throws ApiException, IOException {
@@ -470,6 +487,13 @@ public class ApiConnection {
         return performRequest(new Request(RequestMethod.CATEGORY_GET, id)).getCategory();
     }
     
+    /**
+     * Get payment details by id
+     */
+    public Payment getPayment(Long paymentId) throws ApiException, IOException {
+		 return performRequest(new Request(RequestMethod.PAYMENT_GET, paymentId)).getPayment();
+	}
+    
     public boolean isDebug() {
         return debug;
     }
@@ -477,7 +501,53 @@ public class ApiConnection {
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
+    
+    /**
+     * Update item details
+     */
     public void updateItem(Item item) throws ApiException, IOException {
         performRequest(new Request(RequestMethod.ITEM_UPDATE, item));
     }
+    
+    /**
+     * Update client details
+     */
+	public void updateClient(Client client) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.CLIENT_UPDATE, client));
+	}
+	
+	/**
+	 * Update a payment
+	 */
+	public void updatePayment(Payment payment) throws ApiException, IOException {
+        performRequest(new Request(RequestMethod.PAYMENT_UPDATE, payment));
+    }
+	
+	/**
+	 * Verify a callback, the Callback object should only have the callbackId and verifier property set
+	 */
+	public void verifyCallback(Callback callback) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.CALLBACK_VERIFY, callback));
+	}
+	
+	/**
+	 * Resend's the callback's verifier token
+	 */
+	public void resendToken(long callbackId) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.CALLBACK_RESEND_TOKEN, callbackId));
+	}
+	
+	/**
+	 * Deletes a callback
+	 */
+	public void deleteCallback(long callbackId) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.CALLBACK_DELETE, callbackId));
+	}
+	
+	/**
+	 * Deletes a payment
+	 */
+	public void deletePayment(long paymentId) throws ApiException, IOException {
+		 performRequest(new Request(RequestMethod.PAYMENT_DELETE, paymentId));
+	}
 }

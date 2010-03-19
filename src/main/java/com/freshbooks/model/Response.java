@@ -36,6 +36,10 @@ public class Response extends Message {
         status = ResponseStatus.ok;
         setItems(items);
     }
+    public Response(Callbacks callbacks) {
+    	status = ResponseStatus.ok;
+    	setCallbacks(callbacks);
+    }
     public ResponseStatus getStatus() {
         return status;
     }

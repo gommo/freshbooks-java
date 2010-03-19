@@ -37,6 +37,11 @@ public class Message {
     protected Item item;
     protected Items items;
     
+    @XStreamAlias("callback_id")
+    protected Long callbackId;
+    protected Callback callback;
+    protected Callbacks callbacks;
+    
     @XStreamAlias("project_id")
     protected Long projectId;
     
@@ -203,5 +208,28 @@ public class Message {
     public void setItems(Items items) {
         this.items = items;
     }
-    
+
+	public Long getCallbackId() {
+		return callbackId;
+	}
+
+	public void setCallbackId(Long callbackId) {
+		this.callbackId = callbackId;
+	}
+
+	public Callback getCallback() {
+		return callback;
+	}
+
+	public void setCallback(Callback callback) {
+		this.callback = callback;
+	}
+
+	public Callbacks getCallbacks() {
+		return callbacks;
+	}
+
+	public void setCallbacks(Callbacks callbacks) {
+		this.callbacks = callbacks;
+	}
 }
