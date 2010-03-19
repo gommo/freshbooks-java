@@ -467,6 +467,13 @@ public class ApiConnection {
     }
     
     /**
+     * Fetch the details of an item.
+     */
+    public Item getItem(Long id) throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.ITEM_GET, id)).getItem();
+    }
+    
+    /**
      * Fetch the details of an invoice
      */
     public Invoice getInvoice(Long id) throws ApiException, IOException {
@@ -517,6 +524,13 @@ public class ApiConnection {
 	}
 	
 	/**
+     * Update invoice details
+     */
+	public void updateInvoice(Invoice invoice) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.INVOICE_UPDATE, invoice));
+	}
+	
+	/**
 	 * Update a payment
 	 */
 	public void updatePayment(Payment payment) throws ApiException, IOException {
@@ -533,21 +547,56 @@ public class ApiConnection {
 	/**
 	 * Resend's the callback's verifier token
 	 */
-	public void resendToken(long callbackId) throws ApiException, IOException {
+	public void resendToken(Long callbackId) throws ApiException, IOException {
 		performRequest(new Request(RequestMethod.CALLBACK_RESEND_TOKEN, callbackId));
 	}
 	
 	/**
 	 * Deletes a callback
 	 */
-	public void deleteCallback(long callbackId) throws ApiException, IOException {
+	public void deleteCallback(Long callbackId) throws ApiException, IOException {
 		performRequest(new Request(RequestMethod.CALLBACK_DELETE, callbackId));
 	}
 	
 	/**
 	 * Deletes a payment
 	 */
-	public void deletePayment(long paymentId) throws ApiException, IOException {
+	public void deletePayment(Long paymentId) throws ApiException, IOException {
 		 performRequest(new Request(RequestMethod.PAYMENT_DELETE, paymentId));
+	}
+	
+	/**
+	 * Deletes a client
+	 */
+	public void deleteClient(Long clientId) throws ApiException, IOException {
+		 performRequest(new Request(RequestMethod.CLIENT_DELETE, clientId));
+	}
+	
+	/**
+	 * Deletes an invoice
+	 */
+	public void deleteInvoice(Long invoiceId) throws ApiException, IOException {
+		 performRequest(new Request(RequestMethod.INVOICE_DELETE, invoiceId));
+	}
+	
+	/**
+	 * Deletes an item
+	 */
+	public void deleteItem(Long itemId) throws ApiException, IOException {
+		 performRequest(new Request(RequestMethod.ITEM_DELETE, itemId));
+	}
+	
+	/**
+	 * Sends an invoice by email
+	 */
+	public void sendInvoiceByEmail(Long invoiceId) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.INVOICE_SEND_BY_EMAIL, invoiceId));
+	}
+	
+	/**
+	 * Sends an invoice by email
+	 */
+	public void sendInvoiceBySnailMail(Long invoiceId) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.INVOICE_SEND_BY_SNAIL_MAIL, invoiceId));
 	}
 }
