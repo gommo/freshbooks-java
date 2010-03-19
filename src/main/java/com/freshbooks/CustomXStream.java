@@ -12,6 +12,7 @@ import com.freshbooks.model.Response;
 import com.freshbooks.model.ResponseStatus;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
+import com.thoughtworks.xstream.converters.basic.BooleanConverter;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -21,6 +22,7 @@ import com.thoughtworks.xstream.mapper.MapperWrapper;
 public class CustomXStream extends XStream {
     public CustomXStream() {
         super(null, new XppDriver(new XmlFriendlyReplacer("::", "_")));
+        registerConverter(BooleanConverter.BINARY);
         registerConverter(new DateConverter("yyyy-MM-dd", new String[0]));
         registerConverter(new SingleValueConverter() {
             @SuppressWarnings("unchecked")
