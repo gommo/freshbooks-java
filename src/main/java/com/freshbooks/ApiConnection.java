@@ -599,4 +599,11 @@ public class ApiConnection {
 	public void sendInvoiceBySnailMail(Long invoiceId) throws ApiException, IOException {
 		performRequest(new Request(RequestMethod.INVOICE_SEND_BY_SNAIL_MAIL, invoiceId));
 	}
+	
+	public byte[] getInvoicePDF(Long id) throws ApiException, IOException {
+        Invoice inv = performRequest(new Request(RequestMethod.INVOICE_GET, id)).getInvoice();
+        String clientViewUrl = inv.getLinks().getClientView();
+        byte[] pdfBytes = PDFGrabber.getPDF(id, clientViewUrl);
+        return pdfBytes;
+    }
 }
