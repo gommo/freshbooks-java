@@ -14,42 +14,43 @@ public class PDFGrabber {
 	public static byte[] getPDF(long invoiceId, String clientViewUrlStr) throws IOException, MalformedURLException {
 		HttpClient client = new HttpClient();
 		client.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
-	        
+
 		URL clientViewUrl = new URL(clientViewUrlStr);
-		
+
+		//sets the cookies so we can access the getPDF.php page
 		PostMethod method = new PostMethod(clientViewUrlStr);
 		try {
 			client.executeMethod(method);
-		}
-		finally {
+		} finally {
 			method.releaseConnection();
 		}
 		
+		//grabs the server name from the clientViewUrl
 		String pdfUrl = "https://" + clientViewUrl.getHost() + "/getPDF.php";
-		
+
+		//gets the pdf
 		method = new PostMethod(pdfUrl);
-        method.addParameter("invoiceid[]", String.valueOf(invoiceId));
-        method.addParameter("disposition", "attachment");
-        
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        
-        try {
-        	client.executeMethod(method);
-        	
-        	InputStream in = method.getResponseBodyAsStream();
-        	byte[] buffer = new byte[1024];
-        	while ( in.read(buffer) != -1 ) {
-        		baos.write(buffer);
-        	}
-        }
-        finally {
-        	method.releaseConnection();
-        }
-        
-        byte[] outBytes = baos.toByteArray();
-        baos.close();
-        baos = null;
-        
-        return outBytes;
+		method.addParameter("invoiceid[]", String.valueOf(invoiceId));
+		method.addParameter("disposition", "attachment");
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		try {
+			client.executeMethod(method);
+
+			InputStream in = method.getResponseBodyAsStream();
+			byte[] buffer = new byte[1024];
+			while (in.read(buffer) != -1) {
+				baos.write(buffer);
+			}
+		} finally {
+			method.releaseConnection();
+		}
+
+		byte[] outBytes = baos.toByteArray();
+		baos.close();
+		baos = null;
+
+		return outBytes;
 	}
 }
