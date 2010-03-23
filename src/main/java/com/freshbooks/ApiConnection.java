@@ -67,6 +67,22 @@ public class ApiConnection {
         }
         return client;
     }
+    
+    protected void checkRequestAndOmitFields(Request request, XStream xs) {
+    	//if this is an "invoice.update" method, and the lines property is empty
+        //omit converting the lines field otherwise the call will erase all the
+        //lines on our invoice
+        if ( request.getMethod() == "invoice.update" ) {
+        	if ( request.getInvoice().getLines() == null || request.getInvoice().getLines().size() == 0 ) {
+        		xs.omitField(Invoice.class, "lines");
+        	}
+        }
+        else if ( request.getMethod() == "recurring.update" ) {
+        	if ( request.getInvoice().getLines() == null || request.getInvoice().getLines().size() == 0 ) {
+        		xs.omitField(Recurring.class, "lines");
+        	}
+        }
+    }
 
     /**
      * Send a request to the FreshBooks API and return the response object.
@@ -79,6 +95,8 @@ public class ApiConnection {
     protected Response performRequest(Request request) throws ApiException, IOException {
         try {
             XStream xs = new CustomXStream();
+            
+            checkRequestAndOmitFields(request, xs);
             
             String paramString = xs.toXML(request);
             PostMethod method = new PostMethod(url.toString());
