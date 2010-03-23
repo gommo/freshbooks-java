@@ -33,6 +33,8 @@ import com.freshbooks.model.Items;
 import com.freshbooks.model.PagedResponseContent;
 import com.freshbooks.model.Payment;
 import com.freshbooks.model.Payments;
+import com.freshbooks.model.Recurring;
+import com.freshbooks.model.Recurrings;
 import com.freshbooks.model.Request;
 import com.freshbooks.model.RequestMethod;
 import com.freshbooks.model.Response;
@@ -140,6 +142,10 @@ public class ApiConnection {
     
     public Long createPayment(Payment payment) throws ApiException, IOException {
         return performRequest(new Request(RequestMethod.PAYMENT_CREATE, payment)).getPaymentId();
+    }
+    
+    public Long createRecurring(Recurring recurring) throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.RECURRING_CREATE, recurring)).getRecurringId();
     }
     
     public URL getUrl() {
@@ -459,6 +465,10 @@ public class ApiConnection {
         return performRequest(new Request(RequestMethod.CALLBACK_LIST)).getCallbacks();
     }
     
+    public Recurrings listRecurrings() throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.RECURRING_LIST)).getRecurrings();
+    }
+    
     /**
      * Fetch the details of a client.
      */
@@ -501,6 +511,10 @@ public class ApiConnection {
 		 return performRequest(new Request(RequestMethod.PAYMENT_GET, paymentId)).getPayment();
 	}
     
+    public Recurring getRecurring(Long id) throws ApiException, IOException {
+        return performRequest(new Request(RequestMethod.RECURRING_GET, id)).getRecurring();
+    }
+    
     public boolean isDebug() {
         return debug;
     }
@@ -521,6 +535,10 @@ public class ApiConnection {
      */
 	public void updateClient(Client client) throws ApiException, IOException {
 		performRequest(new Request(RequestMethod.CLIENT_UPDATE, client));
+	}
+	
+	public void updateRecurring(Recurring recurring) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.RECURRING_UPDATE, recurring));
 	}
 	
 	/**
@@ -598,6 +616,10 @@ public class ApiConnection {
 	 */
 	public void sendInvoiceBySnailMail(Long invoiceId) throws ApiException, IOException {
 		performRequest(new Request(RequestMethod.INVOICE_SEND_BY_SNAIL_MAIL, invoiceId));
+	}
+	
+	public void deleteRecurring(Long recurringId) throws ApiException, IOException {
+		performRequest(new Request(RequestMethod.RECURRING_DELETE, recurringId));
 	}
 	
 	public byte[] getInvoicePDF(Long id) throws ApiException, IOException {

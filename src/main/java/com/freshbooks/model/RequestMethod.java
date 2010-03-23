@@ -44,7 +44,13 @@ public enum RequestMethod {
     CALLBACK_VERIFY("callback.verify"),
     CALLBACK_RESEND_TOKEN("callback.resendToken"),
     CALLBACK_LIST("callback.list"),
-    CALLBACK_DELETE("callback.delete");
+    CALLBACK_DELETE("callback.delete"),
+    
+    RECURRING_CREATE("recurring.create"),
+    RECURRING_UPDATE("recurring.update"),
+    RECURRING_GET("recurring.get"),
+    RECURRING_DELETE("recurring.delete"),
+    RECURRING_LIST("recurring.list");
     
     final String id;
 

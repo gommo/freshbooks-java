@@ -64,6 +64,10 @@ public class Request extends Message {
         case CALLBACK_RESEND_TOKEN:
         	this.callbackId = id;
         	break;
+        case RECURRING_DELETE:
+        case RECURRING_GET:
+        	this.recurringId = id;
+        	break;
         default:
             throw new UnsupportedOperationException("Don't know what to do with an id for method "+method);
         }
@@ -87,6 +91,10 @@ public class Request extends Message {
     public Request(RequestMethod method, Payment payment) {
         this(method.id);
         this.payment = payment;
+    }
+    public Request(RequestMethod method, Recurring recurring) {
+        this(method.id);
+        this.recurring = recurring;
     }
     public Request(String method) {
         this.method = method;

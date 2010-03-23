@@ -42,6 +42,11 @@ public class Message {
     protected Callback callback;
     protected Callbacks callbacks;
     
+    @XStreamAlias("recurring_id")
+    protected Long recurringId;
+    protected Recurring recurring;
+    protected Recurrings recurrings;
+    
     @XStreamAlias("project_id")
     protected Long projectId;
     
@@ -231,5 +236,29 @@ public class Message {
 
 	public void setCallbacks(Callbacks callbacks) {
 		this.callbacks = callbacks;
+	}
+
+	public Long getRecurringId() {
+		return recurringId;
+	}
+
+	public void setRecurringId(Long recurringId) {
+		this.recurringId = recurringId;
+	}
+
+	public Recurring getRecurring() {
+		return recurring;
+	}
+
+	public void setRecurring(Recurring recurring) {
+		this.recurring = recurring;
+	}
+
+	public Recurrings getRecurrings() {
+		return recurrings;
+	}
+
+	public void setRecurrings(Recurrings recurrings) {
+		this.recurrings = recurrings;
 	}
 }
