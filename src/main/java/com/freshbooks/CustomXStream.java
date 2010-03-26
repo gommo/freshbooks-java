@@ -29,12 +29,9 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 import com.thoughtworks.xstream.converters.basic.BooleanConverter;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
-import com.thoughtworks.xstream.converters.collections.CollectionConverter;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 import com.thoughtworks.xstream.mapper.CannotResolveClassException;
-import com.thoughtworks.xstream.mapper.FieldAliasingMapper;
-import com.thoughtworks.xstream.mapper.Mapper;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 
 public class CustomXStream extends XStream {
@@ -43,7 +40,6 @@ public class CustomXStream extends XStream {
         registerConverter(BooleanConverter.BINARY);
         registerConverter(new DateConverter("yyyy-MM-dd", new String[0]));
         registerConverter(new SingleValueConverter() {
-            @SuppressWarnings("unchecked")
             @Override
             public boolean canConvert(Class type) {
                 return type.equals(Long.class);
@@ -62,7 +58,6 @@ public class CustomXStream extends XStream {
             }
         });
         registerConverter(new SingleValueConverter() {
-            @SuppressWarnings("unchecked")
             @Override
             public boolean canConvert(Class type) {
                 return type.equals(Double.class);
@@ -125,7 +120,6 @@ public class CustomXStream extends XStream {
      */  
     protected MapperWrapper wrapMapper(MapperWrapper next) {
         return new MapperWrapper(next) {
-            @SuppressWarnings("unchecked")
             public boolean shouldSerializeMember(Class definedIn, String fieldName) {
                 try {
                 	//check wrapped mapper first so that omitField will still work
