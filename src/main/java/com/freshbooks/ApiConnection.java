@@ -72,12 +72,12 @@ public class ApiConnection {
     	//if this is an "invoice.update" method, and the lines property is empty
         //omit converting the lines field otherwise the call will erase all the
         //lines on our invoice
-        if ( request.getMethod() == "invoice.update" ) {
+        if ( request.getMethod().equals("invoice.update") ) {
         	if ( request.getInvoice().getLines() == null || request.getInvoice().getLines().size() == 0 ) {
         		xs.omitField(Invoice.class, "lines");
         	}
         }
-        else if ( request.getMethod() == "recurring.update" ) {
+        else if ( request.getMethod().equals("recurring.update") ) {
         	if ( request.getInvoice().getLines() == null || request.getInvoice().getLines().size() == 0 ) {
         		xs.omitField(Recurring.class, "lines");
         	}
