@@ -386,6 +386,18 @@ public class ApiConnection {
         }
     }
     
+    class RecurringsIterator extends RecordsIterator<Recurring> {
+
+        private RecurringsIterator(Integer perPage, Long clientId) throws ApiException, IOException {
+            super(perPage, null, null, clientId, null, null, null, null, null);
+        }
+        
+        @Override
+        protected PagedResponseContent<Recurring> list(int page) throws ApiException, IOException {
+            return listRecurrings(page, perPage, clientId);
+        }
+    }
+    
     /**
      * Return a list of invoices.
      * 
@@ -457,6 +469,24 @@ public class ApiConnection {
         request.setUsername(username);
         request.setEmail(email);
         return performRequest(request).getClients();
+    }
+    
+    /**
+     * List recurring profiles for a client
+     * 
+     * @param page
+     * @param perPage
+     * @param clientId
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    public Recurrings listRecurrings(int page, Integer perPage, Long clientId) throws ApiException, IOException {
+        Request request = new Request(RequestMethod.RECURRING_LIST);
+        request.setPage(page);
+        request.setPerPage(perPage);
+        request.setClientId(clientId);
+        return performRequest(request).getRecurrings();
     }
 
     /**
