@@ -16,9 +16,9 @@
     </description>
 	
     <target name="version">
-    	<checksum totalproperty="checksum">
+    	<checksum totalproperty="checksum" todir="build">
     		<fileset file="build/${ivy.module}-${ivy.revision}.jar"/>
-    		<fileset file="ivy.xml"/>
+    		<fileset file="build/ivy-${ivy.revision}.jar"/>
     	</checksum>
         <property name="ivy.new.revision" value="${ivy.revision}.${checksum}"/>
     </target>
