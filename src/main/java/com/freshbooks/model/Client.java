@@ -1,8 +1,11 @@
 package com.freshbooks.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("client")
 public class Client implements Serializable {
@@ -59,6 +62,8 @@ public class Client implements Serializable {
     String secondaryCode;
     
     Links links;
+    
+    List<Credit> credits;
     
     public String getFirstName() {
         return firstName;
@@ -359,4 +364,10 @@ public class Client implements Serializable {
             return organization;
         }
     }
+	public List<Credit> getCredits() {
+		return credits;
+	}
+	public void setCredits(List<Credit> credits) {
+		this.credits = credits;
+	}
 }

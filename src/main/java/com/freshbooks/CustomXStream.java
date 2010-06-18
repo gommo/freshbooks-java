@@ -11,6 +11,7 @@ import com.freshbooks.model.Categories;
 import com.freshbooks.model.Category;
 import com.freshbooks.model.Client;
 import com.freshbooks.model.Clients;
+import com.freshbooks.model.Credit;
 import com.freshbooks.model.Expense;
 import com.freshbooks.model.Expenses;
 import com.freshbooks.model.Invoice;
@@ -26,9 +27,14 @@ import com.freshbooks.model.Request;
 import com.freshbooks.model.Response;
 import com.freshbooks.model.ResponseStatus;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.converters.basic.BooleanConverter;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 import com.thoughtworks.xstream.mapper.CannotResolveClassException;
@@ -86,6 +92,28 @@ public class CustomXStream extends XStream {
                 return super.fromString(str);
             }
         });
+        registerConverter(new Converter() {
+			@Override
+			public boolean canConvert(Class arg0) {
+				return arg0.equals(Credit.class);
+			}
+			
+			@Override
+			public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+				Credit c = new Credit();
+				c.setCurrency( reader.getAttribute("currency") );
+				c.setAmount( Double.parseDouble(reader.getValue()) );
+				return c;
+			}
+			
+			@Override
+			public void marshal(Object value, HierarchicalStreamWriter writer, MarshallingContext context) {
+				// TODO Auto-generated method stub
+				final Credit c = (Credit)value;
+				writer.addAttribute("currency", c.getCurrency());
+				writer.setValue(String.valueOf(c.getAmount()));
+			}
+		});
         processAnnotations(new Class[] {
             Request.class,
             Response.class,
@@ -111,7 +139,8 @@ public class CustomXStream extends XStream {
             Links.class,
             Autobill.class,
             Exception.class,
-            Card.class
+            Card.class,
+            Credit.class
         });
     }
     
