@@ -373,6 +373,18 @@ public class ApiConnection {
             return listClients(page, perPage, username, email);
         }
     }
+    
+    class CallbacksIterator extends RecordsIterator<Callback> {
+
+        private CallbacksIterator(Integer perPage) throws ApiException, IOException {
+            super(perPage, null, null, null, null, null, null, null, null);
+        }
+        
+        @Override
+        protected PagedResponseContent<Callback> list(int page) throws ApiException, IOException {
+            return listCallbacks(page, perPage);
+        }
+    }
 
     class ItemsIterator extends RecordsIterator<Item> {
 
@@ -507,10 +519,32 @@ public class ApiConnection {
     }
     
     /**
-     * Get all the callbacks defined
+     * Get a list of callbacks
+     * @throws IOException
      */
-    public Callbacks listCallbacks() throws ApiException, IOException {
-        return performRequest(new Request(RequestMethod.CALLBACK_LIST)).getCallbacks();
+    public Callbacks listCallbacks(int page, Integer perPage) throws ApiException, IOException {
+        Request request = new Request(RequestMethod.CALLBACK_LIST);
+        request.setPage(page);
+        request.setPerPage(perPage);
+        return performRequest(request).getCallbacks();
+    }
+    
+    /**
+     * Iterate over the callbacks
+     */
+    public Iterable<Callback> listCallbacks(final Integer perPage) {
+        return new Iterable<Callback>() {
+            @Override
+            public Iterator<Callback> iterator() {
+                try {
+                    return new CallbacksIterator(perPage);
+                } catch (ApiException e) {
+                    throw new Error(e);
+                } catch (IOException e) {
+                    throw new Error(e);
+                }
+            }
+        };
     }
     
     public Recurrings listRecurrings() throws ApiException, IOException {
